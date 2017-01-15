@@ -3,22 +3,23 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const router = new VueRouter({
+module.exports.router = new VueRouter({
     mode: 'history',
+    linkActiveClass: 'is-active',
     routes: [
         {
             path: '/',
-            component: require('./components/index.component.vue')
+            name: 'index',
+            component: require('./components/index.component')
         },
         {
             path: '/news',
-            component: require('./components/news.component.vue')
+            name: 'news',
+            component: require('./components/news.component')
         },
         {
             path: '*',
-            component: require('./components/not-found.component.vue')
+            component: require('./components/not-found.component')
         }
     ]
 })
-
-export { router }

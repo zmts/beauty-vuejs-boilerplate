@@ -9,8 +9,8 @@
 <script>
 export default {
     components: {
-        HeaderComponent: require('./components/header.component.vue'),
-        FooterComponent: require('./components/footer.component.vue')
+        HeaderComponent: require('./components/header.component'),
+        FooterComponent: require('./components/footer.component')
     }
 }
 </script>

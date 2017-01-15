@@ -1,8 +1,8 @@
 <template>
 <div>
     <h1>{{ msg }}</h1>
-        <router-link to="/">Home</router-link>
-        <router-link to="/news">News</router-link>
+        <router-link :to="{ name: 'index' }" exact>Home</router-link>
+        <router-link :to="{ name: 'news' }">News</router-link>
 </div>
 </template>
 
@@ -18,5 +18,14 @@ export default {
 </script>
 
 <style scoped>
+
+a {
+    padding: 10px;
+}
+
+.is-active{
+    color: red;
+    border: 1px solid red;
+}
 
 </style>
