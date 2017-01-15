@@ -1,8 +1,6 @@
 <template>
 <div>
-    <div>
-        <router-view></router-view>
-    </div>
+    <h1>Index component</h1>
 </div>
 </template>
 
