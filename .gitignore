@@ -1,0 +1,12 @@
+node_modules/
+bower_components/
+tmp/
+.tmp/
+tmp_files/
+.DS_Store
+npm-debug.log
+.idea
+*.ai
+*.psd
+*.pdf
+
