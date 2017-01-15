@@ -1,6 +1,8 @@
 <template>
 <div>
     <h1>{{ msg }}</h1>
+        <router-link to="/">Home</router-link>
+        <router-link to="/news">News</router-link>
 </div>
 </template>
 
@@ -8,7 +10,7 @@
 export default {
     data () {
         return {
-            msg: 'Header test',
+            msg: 'Header title',
             items: [0, 1, 2]
         }
     }
