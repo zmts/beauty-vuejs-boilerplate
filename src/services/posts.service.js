@@ -1,4 +1,4 @@
-import Http from './http.init'
+import { Http } from './http.init'
 import { ResponseWrapper, ErrorWrapper } from './util'
 import * as CONFIG from '../app.config'
 const ENTITY = 'posts'

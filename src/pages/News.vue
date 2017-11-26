@@ -5,7 +5,7 @@
             <br><br>
         </div>
         <div class="news-list">
-            <div class="loading" v-if="!news.length"><h1>loading...</h1>s</div>
+            <div class="loading" v-if="!news.length"><h1>loading...</h1></div>
             <div class="item" v-for="item in news">
                 {{item.title}}
             </div>

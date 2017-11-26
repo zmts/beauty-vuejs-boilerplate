@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Http from '../services/http.init'
+import { Http } from './http.init'
 import $store from '../store'
 import $router from '../router'
 
