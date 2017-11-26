@@ -1,0 +1,37 @@
+$desktop_width: 4096px;
+$tablet_width: 1024px;
+$mobile_width: 640px;
+
+@mixin media_desktop{
+    @media only screen
+    and (max-width: #{$desktop_width}) {
+        @content;
+    }
+}
+
+@mixin media_tablet{
+    @media only screen
+    and (max-width: #{$tablet_width}){
+        @content;
+    }
+}
+@mixin media_mobile{
+    @media only screen
+    and (max-width: #{$mobile_width}){
+        @content;
+    }
+}
+
+@mixin media_ie{ // ie9+ (for applying rules USE !important)
+    @media screen
+    and (min-width:0\0)
+    and (min-resolution: +72dpi) {
+        @content;
+    }
+}
+
+@mixin media_edge {
+    @supports (-ms-accelerator:true){
+        @content;
+    }
+}
