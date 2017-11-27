@@ -27,7 +27,17 @@ export function refreshTokens () {
     }).then(response => {
         _setAuthData(response)
         return response
-    }).catch(error => new Error(error))
+    }).catch(error => {
+        if (error.response.data.badRefreshToken) {
+            $store.commit('SET_USER', {})
+            throw new Error('http.init.js >> badRefreshToken: true')
+        }
+        if (error.response.data.refreshTokenExpiredError) {
+            $store.commit('SET_USER', {})
+            $router.push({name: 'index'})
+            throw new Error('http.init.js >> refreshTokenExpiredError')
+        }
+    })
 }
 
 export function makeLogout () {

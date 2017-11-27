@@ -45,16 +45,7 @@ new Vue({
             authService.refreshTokens()
                 .then(() => userService.getCurrent())
                 .then(user => store.commit('SET_USER', user.data))
-                .catch(error => {
-                    if (error.response.data.badRefreshToken) {
-                        console.log('app.init.js >> badRefreshToken: true')
-                    }
-                    if (error.response.data.refreshTokenExpiredError) {
-                        console.log('app.init.js >> refreshTokenExpiredError: true')
-                    } else {
-                        console.log(error)
-                    }
-                })
+                .catch(error => console.log(error))
         }
     }
 })
