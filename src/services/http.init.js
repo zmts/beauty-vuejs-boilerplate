@@ -5,6 +5,7 @@
  */
 
 import axios from 'axios'
+import { API_URL } from '../app.config'
 
 import $store from '../store'
 import * as authService from '../services/auth.service'
@@ -12,7 +13,9 @@ import * as authService from '../services/auth.service'
 export class Http {
     constructor (status) {
         this.isAuth = status && status.auth ? status.auth : false
-        this.instance = axios.create()
+        this.instance = axios.create({
+            baseURL: API_URL
+        })
 
         if (this.isAuth) {
             this.instance.interceptors.request.use(request => {

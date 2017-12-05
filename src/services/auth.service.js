@@ -3,7 +3,7 @@ import { Http } from './http.init'
 import $store from '../store'
 import $router from '../router'
 
-import * as CONFIG from '../app.config'
+import { API_URL } from '../app.config'
 
 /**
  ******************************
@@ -12,17 +12,17 @@ import * as CONFIG from '../app.config'
  */
 
 export function makeLogin ({email, password}) {
-    return axios.post(`${CONFIG.API_URL}/auth/signin`, {
+    return axios.post(`${API_URL}/auth/signin`, {
         email,
         password
     }).then(response => {
         _setAuthData(response)
         return response
-    }).catch(error => new Error(error))
+    }).catch(error => { throw new Error(error) })
 }
 
 export function refreshTokens () {
-    return axios.post(`${CONFIG.API_URL}/auth/refresh-tokens`, {
+    return axios.post(`${API_URL}/auth/refresh-tokens`, {
         refreshToken: localStorage.getItem('refreshToken')
     }).then(response => {
         _setAuthData(response)
@@ -41,11 +41,11 @@ export function refreshTokens () {
 }
 
 export function makeLogout () {
-    return new Http({auth: true}).post(`${CONFIG.API_URL}/auth/signout`, {})
+    return new Http({auth: true}).post(`auth/signout`)
         .then(() => {
             _resetAuthData()
             $router.push({name: 'index'})
-        }).catch(error => new Error(error))
+        }).catch(error => { throw new Error(error) })
 }
 
 /**

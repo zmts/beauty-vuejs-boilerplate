@@ -31,10 +31,8 @@ export default {
 
     mounted () {
         postsService.getPosts()
-            .then(response => {
-                console.log('response', response)
-                this.news = response.data.content
-            }).catch(error => console.log(error.message))
+            .then(response => { this.news = response.data.content })
+            .catch(error => console.log(error.message))
     }
 }
 </script>
