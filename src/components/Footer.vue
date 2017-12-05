@@ -22,8 +22,7 @@
         text-align: center;
         background-color: #ccc;
         padding: 40px 0;
-        position: absolute;
         width: 100%;
-        bottom: -95px;
+        margin-top: auto;
     }
 </style>

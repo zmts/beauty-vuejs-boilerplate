@@ -8,6 +8,12 @@ body {
     font-family: Lato, Helvetica, Arial, sans-serif;
 }
 
+#app{
+    background-color: #efeeed;
+    display: flex;
+    flex-direction: column;
+}
+
 img{
     vertical-align: top;
 }
@@ -19,11 +25,6 @@ div, section, header, footer, input, button, span, p{
 // firefox fix 'shaking font inside button'
 input[type=button], button{
     padding: 0;
-}
-
-#app{
-    height: 100%;
-    background-color: #efeeed;
 }
 
 //.page{
