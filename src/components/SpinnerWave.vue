@@ -1,11 +1,11 @@
 <template>
     <div class="spinner-wave component">
         <div class="sk-wave">
-            <div class="sk-rect sk-rect1 loading_color"></div>
-            <div class="sk-rect sk-rect2 loading_color"></div>
-            <div class="sk-rect sk-rect3 loading_color"></div>
-            <div class="sk-rect sk-rect4 loading_color"></div>
-            <div class="sk-rect sk-rect5 loading_color"></div>
+            <div class="sk-rect sk-rect1"></div>
+            <div class="sk-rect sk-rect2"></div>
+            <div class="sk-rect sk-rect3"></div>
+            <div class="sk-rect sk-rect4"></div>
+            <div class="sk-rect sk-rect5"></div>
         </div>
     </div>
 </template>
