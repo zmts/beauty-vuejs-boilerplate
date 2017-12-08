@@ -40,7 +40,7 @@
             },
             upload () {
                 // upload file only if we have file and we don't remove it from preview
-                if (!this.$refs.fileRef.files.length || !this.previewImageData) return
+                if (!this.$refs.file.files.length || !this.previewImageData) return
 
                 const files = this.$refs.file.files
                 const data = new FormData()
