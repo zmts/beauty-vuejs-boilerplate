@@ -1,10 +1,9 @@
 node_modules/
-bower_components/
 dist/
+public/
 tmp/
 .tmp/
 tmp_files/
-public/
 
 npm-debug.log*
 yarn-debug.log*
@@ -16,10 +15,6 @@ yarn-error.log*
 .DS_Store
 .idea
 .vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
 
 *.ai
 *.psd
