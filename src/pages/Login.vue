@@ -1,38 +1,36 @@
 <template>
-  <transition name="overlay-fade">
-    <div class="login">
-      <div class="main">
-        <div class="header">Вход</div>
-        <div class="content">
-          <md-input-container>
-            <label>E-mail</label>
-            <md-input
-              type="text"
-              v-model="email"
-              required>
-            </md-input>
-          </md-input-container>
+  <div class="login">
+    <div class="main">
+      <div class="header">Вход</div>
+      <div class="content">
+        <md-input-container>
+          <label>E-mail</label>
+          <md-input
+            type="text"
+            v-model="email"
+            required>
+          </md-input>
+        </md-input-container>
 
-          <md-input-container md-has-password>
-            <label>Пароль</label>
-            <md-input
-              type="password"
-              v-model="password"
-              @keyup.enter.native="makeLogin"
-              required>
-            </md-input>
-          </md-input-container>
-        </div>
-        <div class="buttons">
-          <md-button class="md-raised" @click="makeLogin">вход</md-button>
-        </div>
+        <md-input-container md-has-password>
+          <label>Пароль</label>
+          <md-input
+            type="password"
+            v-model="password"
+            @keyup.enter.native="makeLogin"
+            required>
+          </md-input>
+        </md-input-container>
+      </div>
+      <div class="buttons">
+        <md-button class="md-raised" @click="makeLogin">вход</md-button>
+      </div>
 
-        <div class="error" v-if="error">
-          {{ error }}
-        </div>
+      <div class="error" v-if="error">
+        {{ error }}
       </div>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script>
@@ -105,14 +103,4 @@
       }
     }
   }
-
-  .overlay-fade-enter-active, .overlay-fade-leave-active {
-    transition: all .2s;
-  }
-
-  .overlay-fade-enter, .overlay-fade-leave-active {
-    opacity: 0;
-    padding-top: 20px;
-  }
-
 </style>

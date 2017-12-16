@@ -78,3 +78,12 @@ input[type=button], button{
         font-weight: bold;
     }
 }
+
+
+// routes transition animation
+.fade-enter-active {
+  transition: opacity .8s
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0
+}

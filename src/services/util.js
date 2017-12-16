@@ -1,34 +1,37 @@
+import forEach from 'lodash/forEach'
+import isArray from 'lodash/isArray'
+
 /**
  * Return message for HTTP status code
  * @param {number} status - HTTP status code
  * @returns {string} Message of network operation
  */
 function _getResponseMessage (status) {
-    let message = ''
-    switch (status) {
-    case 200:
-        message = 'Data successfully fetched'
-        break
-    case 201:
-        message = 'Data successfully created'
-        break
-    case 400:
-        message = 'Validation error'
-        break
-    case 401:
-        message = 'Need auth'
-        break
-    case 404:
-        message = 'Not found'
-        break
-    case 503:
-        message = 'Service Unavailable'
-        break
-    default:
-        message = 'Something wrong. Default error message'
-        break
-    }
-    return message
+  let message = ''
+  switch (status) {
+  case 200:
+    message = 'Data successfully fetched'
+    break
+  case 201:
+    message = 'Data successfully created'
+    break
+  case 400:
+    message = 'Validation error'
+    break
+  case 401:
+    message = 'Need auth'
+    break
+  case 404:
+    message = 'Not found'
+    break
+  case 503:
+    message = 'Service Unavailable'
+    break
+  default:
+    message = 'Something wrong. Default error message'
+    break
+  }
+  return message
 }
 
 /**
@@ -38,12 +41,12 @@ function _getResponseMessage (status) {
  * @param {String} [message] - custom message to display
  */
 export class ResponseWrapper {
-    constructor (response, data = {}, message) {
-        this.data = data
-        this.success = response.data.success
-        this.status = response.status
-        this.message = message || _getResponseMessage(response.status)
-    }
+  constructor (response, data = {}, message) {
+    this.data = data
+    this.success = response.data.success
+    this.status = response.status
+    this.message = message || _getResponseMessage(response.status)
+  }
 }
 
 /**
@@ -52,12 +55,30 @@ export class ResponseWrapper {
  * @param {String} [message] - custom message to display
  */
 export class ErrorWrapper extends Error {
-    constructor (error, message) {
-        super()
-        this.name = 'ErrorWrapper'
-        this.stack = new Error().stack
-        this.success = error.response ? error.response.data.success : false
-        this.status = error.response ? error.response.status : 503
-        this.message = message || _getResponseMessage(this.status)
+  constructor (error, message) {
+    super()
+    this.name = 'ErrorWrapper'
+    this.stack = new Error().stack
+    this.success = error.response ? error.response.data.success : false
+    this.status = error.response ? error.response.status : 503
+    this.message = message || _getResponseMessage(this.status)
+  }
+}
+
+/**
+ * Uses to clear request data before send it
+ * @param data
+ * @return {{}}
+ */
+export function clearData (data) {
+  let result = {}
+  forEach(data, (item, propName) => {
+    if (isArray(item) && item.length) {
+      result[propName] = item
     }
+    if (!isArray(item) && item) {
+      result[propName] = item
+    }
+  })
+  return result
 }
