@@ -6,11 +6,11 @@ import isArray from 'lodash/isArray'
  * @param {number} status - HTTP status code
  * @returns {string} Message of network operation
  */
-function _getResponseMessage (status) {
+function _getStatusMessage (status) {
   let message = ''
   switch (status) {
   case 200:
-    message = 'Data successfully fetched'
+    message = 'All done. Request successfully executed'
     break
   case 201:
     message = 'Data successfully created'
@@ -27,11 +27,21 @@ function _getResponseMessage (status) {
   case 503:
     message = 'Service Unavailable'
     break
+  case 1000:
+    message = 'Client application can\'t get response from API'
+    break
   default:
     message = 'Something wrong. Default error message'
     break
   }
   return message
+}
+
+function _getResponseErrorMessage (error) {
+  if (error.response.data) return error.response.data.description
+  if (error.response.statusText) return error.response.statusText
+  if (error.message) return error.message
+  return '_getResponseErrorMessage can\'t handle error'
 }
 
 /**
@@ -45,7 +55,8 @@ export class ResponseWrapper {
     this.data = data
     this.success = response.data.success
     this.status = response.status
-    this.message = message || _getResponseMessage(response.status)
+    this.statusMessage = _getStatusMessage(this.status)
+    this.message = message || null
   }
 }
 
@@ -59,9 +70,10 @@ export class ErrorWrapper extends Error {
     super()
     this.name = 'ErrorWrapper'
     this.stack = new Error().stack
-    this.success = error.response ? error.response.data.success : false
-    this.status = error.response ? error.response.status : 503
-    this.message = message || _getResponseMessage(this.status)
+    this.success = error.response.data.success || false
+    this.status = error.response.status || 1000
+    this.statusMessage = _getStatusMessage(this.status)
+    this.message = message || _getResponseErrorMessage(error)
   }
 }
 
