@@ -1,9 +1,10 @@
 import axios from 'axios'
-import {Http} from './http.init'
+import { Http } from './http.init'
+import { ResponseWrapper, ErrorWrapper } from './util'
 import $store from '../store'
 import $router from '../router'
 
-import {API_URL} from '../app.config'
+import { API_URL } from '../app.config'
 
 /**
  ******************************
@@ -12,40 +13,48 @@ import {API_URL} from '../app.config'
  */
 
 export function makeLogin ({email, password}) {
-  return axios.post(`${API_URL}/auth/signin`, {
-    email,
-    password
-  }).then(response => {
-    _setAuthData(response)
-    return response
-  }).catch(error => { throw new Error(error) })
-}
-
-export function refreshTokens () {
-  return axios.post(`${API_URL}/auth/refresh-tokens`, {
-    refreshToken: localStorage.getItem('refreshToken')
-  }).then(response => {
-    _setAuthData(response)
-    return response
-  }).catch(error => {
-    if (error.response.data.badRefreshToken) {
-      _resetAuthData()
-      throw new Error('http.init.js >> badRefreshToken: true')
-    }
-    if (error.response.data.refreshTokenExpiredError) {
-      _resetAuthData()
-      $router.push({name: 'index'})
-      throw new Error('http.init.js >> refreshTokenExpiredError')
-    }
+  return new Promise((resolve, reject) => {
+    axios.post(`${API_URL}/auth/signin`, {email, password})
+      .then(response => {
+        _setAuthData(response)
+        return resolve(new ResponseWrapper(response, response.data))
+      }).catch(error => reject(new ErrorWrapper(error)))
   })
 }
 
 export function makeLogout () {
-  return new Http({auth: true}).post(`auth/signout`)
-    .then(() => {
-      _resetAuthData()
-      $router.push({name: 'index'})
-    }).catch(error => { throw new Error(error) })
+  return new Promise((resolve, reject) => {
+    new Http({auth: true}).post(`auth/signout`)
+      .then(response => {
+        _resetAuthData()
+        $router.push({name: 'index'})
+        return resolve(new ResponseWrapper(response, response.data))
+      }).catch(error => reject(new ErrorWrapper(error)))
+  })
+}
+
+export function refreshTokens () {
+  return new Promise((resolve, reject) => {
+    axios.post(`${API_URL}/auth/refresh-tokens`, {refreshToken: getRefreshToken()})
+      .then(response => {
+        _setAuthData(response)
+        return resolve()
+      })
+      .catch(error => {
+        if (error.response.data.badRefreshToken) {
+          console.log('http.init.js >> badRefreshToken: true')
+          _resetAuthData()
+          $router.push({name: 'index'})
+          return reject(new ErrorWrapper(error))
+        }
+        if (error.response.data.refreshTokenExpiredError) {
+          console.log('http.init.js >> refreshTokenExpiredError')
+          _resetAuthData()
+          $router.push({name: 'index'})
+          return reject(new ErrorWrapper(error))
+        }
+      })
+  })
 }
 
 /**

@@ -61,7 +61,7 @@
           })
           .catch((error) => {
             console.log('error', error)
-            this.error = error.response.data.description.status === 404 ? 'Пользователь с таким email не найден' : error.response.data.description.message
+            this.error = error.status === 404 ? 'User with same email not found' : error.message
           })
       }
     }

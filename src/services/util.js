@@ -70,7 +70,7 @@ export class ErrorWrapper extends Error {
     super()
     this.name = 'ErrorWrapper'
     this.stack = new Error().stack
-    this.success = error.response.data.success || false
+    this.success = error.response.data.success
     this.status = error.response.status || 1000
     this.statusMessage = _getStatusMessage(this.status)
     this.message = message || _getResponseErrorMessage(error)
