@@ -5,10 +5,10 @@
  */
 
 import axios from 'axios'
-import {API_URL} from '../app.config'
 
 import $store from '../store'
 import * as authService from '../services/auth.service'
+import { API_URL } from '../app.config'
 
 export class Http {
   constructor (status) {
@@ -21,7 +21,10 @@ export class Http {
       this.instance.interceptors.request.use(request => {
         request.headers['token'] = localStorage.getItem('accessToken')
         // if access token expired >> go to API and get new access token
-        if ($store.state.accessTokenExpDate <= (Math.floor(new Date().getTime() / 1000))) {
+        const accessTokenExpDate = $store.state.accessTokenExpDate - 1
+        const nowTime = Math.floor(new Date().getTime() / 1000)
+        const isRefreshTokenExist = localStorage.getItem('refreshToken')
+        if (isRefreshTokenExist && (accessTokenExpDate <= nowTime)) {
           return authService.refreshTokens()
             .then(response => {
               request.headers['token'] = response.data.accessToken
