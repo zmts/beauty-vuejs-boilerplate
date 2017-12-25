@@ -6,7 +6,6 @@
 
 import axios from 'axios'
 
-import $store from '../store'
 import * as authService from '../services/auth.service'
 import { API_URL } from '../app.config'
 
@@ -20,11 +19,8 @@ export class Http {
     if (this.isAuth) {
       this.instance.interceptors.request.use(request => {
         request.headers['token'] = localStorage.getItem('accessToken')
-        // if access token expired >> go to API and get new access token
-        const accessTokenExpDate = $store.state.accessTokenExpDate - 1
-        const nowTime = Math.floor(new Date().getTime() / 1000)
-        const isRefreshTokenExist = localStorage.getItem('refreshToken')
-        if (isRefreshTokenExist && (accessTokenExpDate <= nowTime)) {
+        // if access token expired and refreshToken is exist >> go to API and get new access token
+        if (authService.isAccessTokenExpired() && authService.getRefreshToken()) {
           return authService.refreshTokens()
             .then(response => {
               request.headers['token'] = response.data.accessToken

@@ -29,11 +29,11 @@ export function refreshTokens () {
     return response
   }).catch(error => {
     if (error.response.data.badRefreshToken) {
-      $store.commit('SET_USER', {})
+      _resetAuthData()
       throw new Error('http.init.js >> badRefreshToken: true')
     }
     if (error.response.data.refreshTokenExpiredError) {
-      $store.commit('SET_USER', {})
+      _resetAuthData()
       $router.push({name: 'index'})
       throw new Error('http.init.js >> refreshTokenExpiredError')
     }
@@ -53,6 +53,17 @@ export function makeLogout () {
  * @methods
  ******************************
  */
+
+export function isAccessTokenExpired () {
+  const accessTokenExpDate = $store.state.accessTokenExpDate - 1
+  const nowTime = Math.floor(new Date().getTime() / 1000)
+
+  return accessTokenExpDate <= nowTime
+}
+
+export function getRefreshToken () {
+  return localStorage.getItem('refreshToken')
+}
 
 function _resetAuthData () {
   // reset userData in store

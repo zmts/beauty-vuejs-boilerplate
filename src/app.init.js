@@ -31,7 +31,7 @@ new Vue({
   store,
 
   created () {
-    if (localStorage.getItem('refreshToken')) {
+    if (authService.getRefreshToken()) {
       this.initAppState()
     }
   },
