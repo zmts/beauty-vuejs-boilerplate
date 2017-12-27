@@ -38,7 +38,7 @@ export function refreshTokens () {
     axios.post(`${API_URL}/auth/refresh-tokens`, {refreshToken: getRefreshToken()})
       .then(response => {
         _setAuthData(response)
-        return resolve()
+        return resolve(new ResponseWrapper(response, response.data))
       })
       .catch(error => {
         if (error.response.data.badRefreshToken) {
