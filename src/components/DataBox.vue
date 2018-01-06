@@ -1,18 +1,17 @@
 <template>
   <div class="data-box component">
-    <div v-if="loading" class="spinner-wrapper">
-      <SpinnerWave></SpinnerWave>
-    </div>
-    <div :class="{'content': true, 'loading': loading}" v-if="!isEmpty && !error">
+    <SpinnerWave class="spinner-wrapper" v-if="loading"></SpinnerWave>
+
+    <div :class="{'data-box-content': true, 'loading': loading}" v-if="!isEmpty && !error">
       <slot></slot>
     </div>
 
-    <div :class="{'content': true, 'loading': loading}" v-if="isEmpty && !error" class="is-empty">
+    <div class="data-box-content is-empty" v-if="isEmpty && !error && !loading">
       <div class="smile">(>_<)</div>
       <div class="title">No content!</div>
     </div>
 
-    <div class="content error" v-if="error">
+    <div class="data-box-content error" v-if="error">
       <div class="smile">(>_<)</div>
       <div class="title">Something wrong here!</div>
       <div class="error-msg">{{ error }}</div>
@@ -38,30 +37,28 @@
         default: false
       }
     },
-    components: {SpinnerWave}
+    components: { SpinnerWave }
   }
 </script>
 
 <style scoped lang="scss">
-  .data-box {
+  .data-box.component {
     position: relative;
     width: 100%;
     height: 100%;
-
-    .content.loading {
+    .data-box-content {
+      height: 100%;
+    }
+    .data-box-content.loading {
+      min-height: 200px;
       opacity: .3;
       pointer-events: none;
     }
     .spinner-wrapper {
-      width: 100%;
-      height: 100%;
       position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
-    .is-empty, .error {
+    .is-empty, .error{
       text-align: center;
       padding: 30px;
       font-size: 16px;
@@ -75,7 +72,11 @@
     }
 
     .error {
-      color: $color-error;
+      color: red;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
       .error-msg {
         padding-top: 10px;
       }
