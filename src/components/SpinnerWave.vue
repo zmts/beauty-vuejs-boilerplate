@@ -1,23 +1,37 @@
 <template>
   <div class="spinner-wave component">
     <div class="sk-wave">
-      <div class="sk-rect sk-rect1"></div>
-      <div class="sk-rect sk-rect2"></div>
-      <div class="sk-rect sk-rect3"></div>
-      <div class="sk-rect sk-rect4"></div>
-      <div class="sk-rect sk-rect5"></div>
+      <div class="sk-rect sk-rect1" :style="loadingColor"></div>
+      <div class="sk-rect sk-rect2" :style="loadingColor"></div>
+      <div class="sk-rect sk-rect3" :style="loadingColor"></div>
+      <div class="sk-rect sk-rect4" :style="loadingColor"></div>
+      <div class="sk-rect sk-rect5" :style="loadingColor"></div>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'SpinnerWave'
+    name: 'SpinnerWave',
+    props: {
+      color: {
+        type: String,
+        default: '#bebebe'
+      }
+    },
+    computed: {
+      loadingColor () {
+        return {
+          'background-color': this.color
+        }
+      }
+    }
   }
 </script>
 
 <style scoped lang="scss">
   .spinner-wave {
+    height: 100%;
     width: 100%;
     z-index: 10;
     display: flex;
@@ -28,7 +42,7 @@
   // https://github.com/tobiasahlin/SpinKit/blob/master/scss/spinners/3-wave.scss
   $spinkit-spinner-margin: 0 auto !default;
   $spinkit-size: 40px !default;
-  $spinkit-spinner-color: #bebebe !default;
+  // $spinkit-spinner-color: #bebebe !default;
 
   .sk-wave {
     $rectCount: 5;
@@ -40,7 +54,7 @@
     text-align: center;
     font-size: 10px;
     .sk-rect {
-      background-color: $spinkit-spinner-color;
+      // background-color: $spinkit-spinner-color;
       height: 100%;
       width: 6px;
       display: inline-block;
