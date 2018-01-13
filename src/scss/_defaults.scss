@@ -1,0 +1,12 @@
+// define default classes
+
+.ITALIC {
+  font-style: italic;
+}
+
+.COLOR_MAIN {
+  color: blue;
+}
+.COLOR_ERROR {
+  color: $color-error;
+}

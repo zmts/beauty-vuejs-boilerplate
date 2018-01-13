@@ -1,14 +1,20 @@
 <template>
   <ul class="pagination component">
-    <li><button class="nav-btn first" @click="goToPage(0)" :disabled="!current">first</button></li>
-    <li><button class="nav-btn previous" @click="goToPage(current - 1)" :disabled="!current">prev</button></li>
+    <li><button class="nav-btn first" @click="goToPage(0)" :disabled="isDisabledPrevBtn">first</button></li>
+    <li><button class="nav-btn previous" @click="goToPage(current - 1)" :disabled="isDisabledPrevBtn">prev</button></li>
 
     <li v-for="page in visiblePagesArray">
-      <button class="item" @click="goToPage(page)" :class="{ 'active': current === page }" :disabled="current === page">{{ page + 1 }}</button>
+      <button
+        @click="goToPage(page)"
+        :disabled="current === page"
+        :class="{ 'active': current === page }"
+        class="item">
+        {{ page + 1 }}
+      </button>
     </li>
 
-    <li><button class="nav-btn next" @click="goToPage(current + 1)" :disabled="current === pagesCount - 1">next</button></li>
-    <li><button class="nav-btn last" @click="goToPage(pagesCount - 1)" :disabled="current === pagesCount - 1">last</button></li>
+    <li><button class="nav-btn next" @click="goToPage(current + 1)" :disabled="isDisabledNextBtn">next</button></li>
+    <li><button class="nav-btn last" @click="goToPage(pagesCount - 1)" :disabled="isDisabledNextBtn">last</button></li>
 
     <li class="info pages-counter">{{ current + 1 }}/{{ pagesCount }}</li>
     <li><span class="separator">|</span></li>
@@ -17,6 +23,9 @@
 </template>
 
 <script>
+  /**
+   * @description Component compatibility developed with pagination that starts from 0 page
+   */
   export default {
     name: 'Pagination',
     props: {
@@ -25,7 +34,7 @@
          * current page number
          */
         type: Number,
-        default: 1,
+        default: 0,
         required: true
       },
       total: {
@@ -55,7 +64,7 @@
 
     methods: {
       goToPage (pageNumber) {
-        if ((pageNumber < 0) || (pageNumber > (this.pagesCount - 1))) return
+        if ((pageNumber < 0) || (pageNumber > this.pagesCount)) return
         this.current = pageNumber
         this.$emit('update:page', this.current)
       }
@@ -87,6 +96,12 @@
           return this.pagesArray.length
         }
         return this.current + this.maxPages
+      },
+      isDisabledNextBtn () {
+        return this.current === this.pagesCount - 1
+      },
+      isDisabledPrevBtn () {
+        return !this.current
       }
     }
   }
@@ -100,8 +115,8 @@
       button {
         cursor: pointer;
         &:disabled {
-        cursor: not-allowed;
-      }
+          cursor: not-allowed;
+        }
       }
     }
   }
