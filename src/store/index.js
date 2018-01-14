@@ -4,34 +4,34 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-    state: {
-        userData: {
-            id: '',
-            role: '',
-            name: '',
-            email: ''
-        },
-
-        accessTokenExpDate: ''
+  state: {
+    userData: {
+      id: '',
+      role: '',
+      name: '',
+      email: ''
     },
 
-    actions: {},
+    accessTokenExpDate: ''
+  },
 
-    mutations: {
-        SET_USER (state, accessTokenData) {
-            state.userData = accessTokenData
-        },
+  actions: {},
 
-        SET_ATOKEN_EXP_DATE (state, expDate) {
-            state.accessTokenExpDate = expDate
-        }
+  mutations: {
+    SET_USER (state, accessTokenData) {
+      state.userData = accessTokenData
     },
 
-    getters: {
-        userData (state) {
-            return state.userData
-        }
-    },
+    SET_ATOKEN_EXP_DATE (state, expDate) {
+      state.accessTokenExpDate = expDate
+    }
+  },
 
-    modules: {}
+  getters: {
+    userData (state) {
+      return state.userData
+    }
+  },
+
+  modules: {}
 })
