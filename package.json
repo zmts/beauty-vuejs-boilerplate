@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "last",
+    "imagesloaded": "^4.1.4",
     "moment": "last",
     "vue": "2.5.8",
     "vue-material": "last",
