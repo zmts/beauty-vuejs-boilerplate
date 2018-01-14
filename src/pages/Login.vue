@@ -35,7 +35,7 @@
 
 <script>
   import * as authService from '../services/auth.service'
-  import * as userService from '../services/user.service'
+  import { UsersService } from '../services/users.service'
 
   export default {
     name: 'Login',
@@ -54,7 +54,7 @@
           password: this.password
         }).then(response => { this.error = '' })
           .then(() => {
-            userService.getCurrent()
+            UsersService.getCurrent()
               .then(user => this.$store.commit('SET_USER', user.data))
               .then(() => this.$router.push('profile'))
               .catch(error => console.log(error))

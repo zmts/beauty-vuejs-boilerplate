@@ -7,7 +7,7 @@ import AppLayout from './app.layout.vue'
 import router from './router'
 import store from './store'
 import * as authService from './services/auth.service'
-import * as userService from './services/user.service'
+import { UsersService } from './services/users.service'
 
 // mixins imports
 import currentUser from './mixins/currentUser'
@@ -43,7 +43,7 @@ new Vue({
      */
     initAppState () {
       authService.refreshTokens()
-        .then(() => userService.getCurrent())
+        .then(() => UsersService.getCurrent())
         .then(user => store.commit('SET_USER', user.data))
         .catch(error => console.log(error))
     }

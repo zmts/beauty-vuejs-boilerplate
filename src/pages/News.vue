@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import * as postsService from '../services/posts.service'
+  import { PostsService } from '../services/posts.service'
 
   export default {
     name: 'News',
@@ -28,7 +28,7 @@
     methods: {},
 
     mounted () {
-      postsService.getPosts()
+      PostsService.getPosts()
         .then(response => {
           this.news = response.data.content
         })

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import * as userService from '../../services/user.service'
+  import { UsersService } from '../../services/users.service'
 
   export default {
     name: 'PostsPage',
@@ -20,7 +20,7 @@
       }
     },
     mounted () {
-      userService.getPostsByUserId(this.$currentUser.id)
+      UsersService.getPostsByUserId(this.$currentUser.id)
         .then(response => {
           this.posts = response.data.content
         })
