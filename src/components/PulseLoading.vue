@@ -16,7 +16,7 @@
   .sk-spinner-pulse {
     width: 40px;
     height: 40px;
-    margin: 40px auto;
+    margin: 0 auto;
     background-color: #fff;
     border-radius: 100%;
     -webkit-animation: sk-pulseScaleOut 1s infinite ease-in-out;

@@ -6,9 +6,8 @@ export default {
      * @return {{}}
      */
     setModelMixin (currentModel, fetchedModel) {
-      if (arguments.length !== 2) throw new Error('setModelMixin requires two arguments(\'currentModel\' and \'fetchedModel\')')
-      if (!currentModel) throw new Error('setModelMixin requires \'currentModel\' argument')
-      if (!fetchedModel) throw new Error('setModelMixin requires \'fetchedModel\' argument')
+      if (!currentModel) throw new Error('requires \'currentModel\' param')
+      if (!fetchedModel) throw new Error('requires \'fetchedModel\' param')
 
       let result = {}
       Object.keys(currentModel).forEach(propName => {
