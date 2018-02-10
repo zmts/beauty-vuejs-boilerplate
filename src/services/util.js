@@ -79,6 +79,7 @@ export class ErrorWrapper extends Error {
 
 /**
  * Uses to clear request data before send it
+ * Client shouldn't change entity id
  * @param data
  * @return {{}}
  */
@@ -88,7 +89,7 @@ export function clearData (data) {
     if (isArray(item) && item.length) {
       result[propName] = item
     }
-    if (!isArray(item) && item) {
+    if (!isArray(item) && item && (propName !== 'id')) {
       result[propName] = item
     }
   })
