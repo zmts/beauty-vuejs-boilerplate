@@ -3,7 +3,7 @@ import Vue from 'vue'
 import VueMaterial from 'vue-material'
 
 // app imports
-import AppLayout from './app.layout.vue'
+import AppLayout from './layout/index.vue'
 import router from './router'
 import store from './store'
 import * as authService from './services/auth.service'

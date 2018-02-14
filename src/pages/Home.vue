@@ -23,7 +23,7 @@
     data () {
       return {
         msg: 'Welcome to Index!!!',
-        isShownModal: true
+        isShownModal: false
       }
     },
 
