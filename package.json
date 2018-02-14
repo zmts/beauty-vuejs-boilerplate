@@ -11,11 +11,11 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "last",
+    "axios": "^0.17.1",
     "imagesloaded": "^4.1.4",
     "moment": "last",
-    "vue": "2.5.8",
-    "vue-material": "last",
+    "vue": "^2.5.13",
+    "vue-material": "0.8.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
@@ -59,7 +59,7 @@
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.5.2",
+    "vue-template-compiler": "^2.5.13",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
