@@ -5,7 +5,7 @@ export class UsersService extends BaseService {
     return 'users'
   }
 
-  static getById (user_id) {
+  static getById (user_id = window.required()) {
     return new Promise((resolve, reject) => {
       return this.request({auth: true}).get(`${this.entity}/${user_id}`)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))
@@ -27,7 +27,7 @@ export class UsersService extends BaseService {
     })
   }
 
-  static getPostsByUserId (user_id) {
+  static getPostsByUserId (user_id = window.required()) {
     return new Promise((resolve, reject) => {
       return this.request({auth: true}).get(`${this.entity}/${user_id}/posts`)
         .then(response => {

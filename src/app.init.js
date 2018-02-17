@@ -8,6 +8,7 @@ import router from './router'
 import store from './store'
 import * as authService from './services/auth.service'
 import { UsersService } from './services/users.service'
+import globalHelpers from './global.helpers'
 
 // mixins imports
 import currentUser from './mixins/currentUser'
@@ -18,6 +19,7 @@ import './scss/style.scss'
 
 Vue.config.productionTip = false
 
+globalHelpers()
 Vue.use(VueMaterial)
 Vue.mixin(currentUser)
 
