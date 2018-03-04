@@ -4,7 +4,7 @@ import { ResponseWrapper, ErrorWrapper } from './util'
 import $store from '../store'
 import $router from '../router'
 
-import { API_URL } from '../app.config'
+import { API_URL } from '../.env'
 
 /**
  ******************************

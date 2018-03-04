@@ -7,7 +7,7 @@
 import axios from 'axios'
 
 import * as authService from '../services/auth.service'
-import { API_URL } from '../app.config'
+import { API_URL } from '../.env'
 
 export class Http {
   constructor (status) {
