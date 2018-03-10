@@ -38,8 +38,8 @@ function _getStatusMessage (status) {
 }
 
 function _getResponseErrorMessage (error) {
-  if (error.response.data) return error.response.data.description
-  if (error.response.statusText) return error.response.statusText
+  if (error.response && error.response.data) return error.response.data.description
+  if (error.response && error.response.statusText) return error.response.statusText
   if (error.message) return error.message
   return '_getResponseErrorMessage can\'t handle error'
 }
@@ -70,8 +70,8 @@ export class ErrorWrapper extends Error {
     super()
     this.name = 'ErrorWrapper'
     this.stack = new Error().stack
-    this.success = error.response.data.success
-    this.status = error.response.status || 1000
+    this.success = error.response ? error.response.data.success : false
+    this.status = error.response ? error.response.status : false
     this.statusMessage = _getStatusMessage(this.status)
     this.message = message || _getResponseErrorMessage(error)
   }
