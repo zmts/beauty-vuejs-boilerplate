@@ -1,9 +1,20 @@
-// define default classes
+// define default classes (IN UPPERCASE)
 
+// font
+.FONT_TITLE {
+  font-family: $font-title;
+}
+.FONT_CONTENT {
+  font-family: $font-content;
+}
 .ITALIC {
   font-style: italic;
 }
+.BOLD {
+  font-weight: bold;
+}
 
+// color
 .COLOR_MAIN {
   color: blue;
 }
