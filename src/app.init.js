@@ -15,6 +15,7 @@ import currentUser from './mixins/currentUser'
 
 // styles imports
 import 'vue-material/dist/vue-material.css'
+import './assets/fonts/bebasneue.css'
 import './scss/style.scss'
 
 Vue.config.productionTip = false
