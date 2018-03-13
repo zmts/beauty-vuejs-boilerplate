@@ -64,7 +64,7 @@ export function refreshTokens () {
  */
 
 export function isAccessTokenExpired () {
-  const accessTokenExpDate = $store.state.accessTokenExpDate - 1
+  const accessTokenExpDate = $store.state.auth.accessTokenExpDate - 1
   const nowTime = Math.floor(new Date().getTime() / 1000)
 
   return accessTokenExpDate <= nowTime
@@ -76,8 +76,8 @@ export function getRefreshToken () {
 
 function _resetAuthData () {
   // reset userData in store
-  $store.commit('SET_USER', {})
-  $store.commit('SET_ATOKEN_EXP_DATE', null)
+  $store.commit('user/SET_CURRENT_USER', {})
+  $store.commit('auth/SET_ATOKEN_EXP_DATE', null)
   // reset tokens in localStorage
   localStorage.setItem('refreshToken', '')
   localStorage.setItem('accessToken', '')
@@ -86,5 +86,5 @@ function _resetAuthData () {
 function _setAuthData (response) {
   localStorage.setItem('refreshToken', response.data.refreshToken)
   localStorage.setItem('accessToken', response.data.accessToken)
-  $store.commit('SET_ATOKEN_EXP_DATE', response.data.expires_in)
+  $store.commit('auth/SET_ATOKEN_EXP_DATE', response.data.expires_in)
 }

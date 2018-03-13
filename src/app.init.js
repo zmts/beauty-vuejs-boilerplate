@@ -28,7 +28,7 @@ Vue.mixin(currentUser)
 new Vue({
   name: 'Root',
   template: '<AppLayout/>',
-  components: {AppLayout},
+  components: { AppLayout },
   el: '#app',
   router,
   store,
@@ -42,12 +42,12 @@ new Vue({
   methods: {
 
     /**
-     * refresh tokens and init userData in store
+     * refresh tokens and init currentUser data in store
      */
     initAppState () {
       authService.refreshTokens()
         .then(() => UsersService.getCurrent())
-        .then(user => store.commit('SET_USER', user.data))
+        .then(user => store.commit('user/SET_CURRENT_USER', user.data))
         .catch(error => console.log(error))
     }
   }

@@ -55,7 +55,7 @@
         }).then(response => { this.error = '' })
           .then(() => {
             UsersService.getCurrent()
-              .then(user => this.$store.commit('SET_USER', user.data))
+              .then(user => this.$store.commit('user/SET_CURRENT_USER', user.data))
               .then(() => this.$router.push('profile'))
               .catch(error => console.log(error))
           })
