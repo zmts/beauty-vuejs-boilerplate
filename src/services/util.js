@@ -27,11 +27,8 @@ function _getStatusMessage (status) {
   case 503:
     message = 'Service Unavailable'
     break
-  case 1000:
-    message = 'Client application can\'t get response from API'
-    break
   default:
-    message = 'Something wrong. Default error message'
+    message = 'Something wrong. Client default error message'
     break
   }
   return message

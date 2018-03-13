@@ -1,5 +1,5 @@
 export default function () {
-  window.required = () => {
-    throw new Error('Required parameter not supplied')
+  window.required = paramName => {
+    throw new Error(`${paramName || 'Required'} parameter not supplied`)
   }
 }

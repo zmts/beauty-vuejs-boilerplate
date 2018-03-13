@@ -1,84 +1,73 @@
 html, body, #app {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 body {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: Lato, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: Lato, Helvetica, Arial, sans-serif;
 }
 
-#app{
-    background-color: #efeeed;
-    display: flex;
-    flex-direction: column;
+#app {
+  background-color: #efeeed;
+  display: flex;
+  flex-direction: column;
 }
 
-img{
-    vertical-align: top;
+img {
+  vertical-align: top;
 }
 
-div, section, header, footer, input, button, span, p{
-    box-sizing: border-box;
+div, section, header, footer, input, button, span, p {
+  box-sizing: border-box;
 }
 
 // firefox fix 'shaking font inside button'
-input[type=button], button{
-    padding: 0;
+input[type=button], button {
+  padding: 0;
 }
 
-//.page{
-//    height: 100%;
-//    width: 100%;
-//    background-color: green;
+//.page {
+//  height: 100%;
+//  width: 100%;
+//  background-color: green;
 //}
 
 .clearfix::after {
-    display: table;
-    clear: both;
-    content: "";
+  display: table;
+  clear: both;
+  content: "";
 }
 
-.is-active{
-    //border-radius: 5px;
-    //border: 3px solid #bebebe;
-    //padding: 5px 15px;
+.is-active {
+  //border-radius: 5px;
+  //border: 3px solid #bebebe;
+  //padding: 5px 15px;
 }
 
-.wrapper{
-    width: 100%;
-    min-width: 300px; // and paddind + 10 + 10
+.wrapper {
+  width: 100%;
+  min-width: 300px; // and paddind + 10 + 10
 
-    margin: 0 auto;
-    padding: 0 10px;
+  margin: 0 auto;
+  padding: 0 10px;
 
-    box-sizing: border-box;
+  box-sizing: border-box;
 
-    @include media_desktop {
-        max-width: 1200px;
-        // background: red;
-    }
+  @include media_desktop {
+    max-width: 1200px;
+    // background: red;
+  }
 
-    @include media_tablet {
-        // background: yellow;
-        max-width: 1024px;
-    }
+  @include media_tablet {
+    // background: yellow;
+    max-width: 1024px;
+  }
 
-    @include media_mobile {
-        // background: green;
-    }
+  @include media_mobile {
+    // background: green;
+  }
 }
-
-.readmode {
-    em {
-        font-style: italic;
-    }
-
-    strong, b {
-        font-weight: bold;
-    }
-}
-
 
 // routes transition animation
 .fade-enter-active {
