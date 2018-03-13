@@ -13,7 +13,7 @@
         </md-input-container>
 
         <md-input-container md-has-password>
-          <label>Пароль</label>
+          <label>Password</label>
           <md-input
             type="password"
             v-model="password"
@@ -23,7 +23,7 @@
         </md-input-container>
       </div>
       <div class="buttons">
-        <md-button class="md-raised" @click="makeLogin">вход</md-button>
+        <md-button class="md-raised" @click="makeLogin">login</md-button>
       </div>
 
       <div class="error" v-if="error">
