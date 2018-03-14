@@ -16,7 +16,7 @@ function _getStatusMessage (status) {
     message = 'Data successfully created'
     break
   case 400:
-    message = 'Validation error'
+    message = 'Bad Request'
     break
   case 401:
     message = 'Need auth'
