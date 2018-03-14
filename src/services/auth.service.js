@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Http } from './http.init'
+import Http from './http.init'
 import { ResponseWrapper, ErrorWrapper } from './util'
 import $store from '../store'
 import $router from '../router'

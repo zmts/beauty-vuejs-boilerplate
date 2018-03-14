@@ -14,7 +14,7 @@
 </template>
 
 <script>
-  import { PostsService } from '../services/posts.service'
+  import PostsService from '../services/posts.service'
 
   export default {
     name: 'News',

@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import { UsersService } from '../../services/users.service'
+  import UsersService from '../../services/users.service'
 
   export default {
     name: 'PostsPage',

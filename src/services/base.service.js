@@ -1,7 +1,7 @@
-import { Http } from './http.init'
+import Http from './http.init'
 import { ResponseWrapper, ErrorWrapper } from './util'
 
-export class BaseService {
+export default class BaseService {
   static request (status) {
     return new Http(status)
   }

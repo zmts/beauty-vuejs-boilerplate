@@ -9,7 +9,7 @@ import axios from 'axios'
 import * as authService from '../services/auth.service'
 import { API_URL } from '../.env'
 
-export class Http {
+export default class Http {
   constructor (status) {
     this.isAuth = status && status.auth ? status.auth : false
     this.instance = axios.create({

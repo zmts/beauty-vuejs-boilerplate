@@ -7,7 +7,7 @@ import AppLayout from './layout/index.vue'
 import router from './router'
 import store from './store'
 import * as authService from './services/auth.service'
-import { UsersService } from './services/users.service'
+import UsersService from './services/users.service'
 import globalHelpers from './global.helpers'
 
 // mixins imports

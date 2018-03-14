@@ -35,7 +35,7 @@
 
 <script>
   import * as authService from '../services/auth.service'
-  import { UsersService } from '../services/users.service'
+  import UsersService from '../services/users.service'
 
   export default {
     name: 'Login',
