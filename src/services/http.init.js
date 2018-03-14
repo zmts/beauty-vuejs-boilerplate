@@ -18,7 +18,7 @@ export class Http {
 
     if (this.isAuth) {
       this.instance.interceptors.request.use(request => {
-        request.headers['token'] = localStorage.getItem('accessToken')
+        request.headers['token'] = authService.getAccessToken()
         // if access token expired and refreshToken is exist >> go to API and get new access token
         if (authService.isAccessTokenExpired() && authService.getRefreshToken()) {
           return authService.refreshTokens()

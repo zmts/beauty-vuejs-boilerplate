@@ -8,6 +8,8 @@ import newsPage from '../pages/News.vue'
 import loginPage from '../pages/Login.vue'
 import notFoundPage from '../pages/NotFound.vue'
 
+import { routePropResolver } from './util'
+
 export const routes = [
   {
     path: '/',
@@ -17,7 +19,8 @@ export const routes = [
   {
     path: '/news',
     name: 'news',
-    component: newsPage
+    component: newsPage,
+    props: routePropResolver
   },
   {
     path: '/profile',

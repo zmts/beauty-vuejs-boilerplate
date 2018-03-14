@@ -40,6 +40,9 @@ Shared components folder.
 ### `config`
 App config files.
 
+### `layout`
+Base app layout components.
+
 ### `mixins`
 Mixins helpers. (Declare global mixins as `$someMixinName.js`). 
 

@@ -7,7 +7,7 @@ export class PostsService extends BaseService {
 
   static getPosts () {
     return new Promise((resolve, reject) => {
-      this.request().get(`${this.entity}`)
+      return this.request().get(`${this.entity}`)
         .then(response => {
           let data = {
             content: response.data.data.results,

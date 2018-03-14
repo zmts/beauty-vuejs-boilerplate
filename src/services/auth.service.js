@@ -74,6 +74,10 @@ export function getRefreshToken () {
   return localStorage.getItem('refreshToken')
 }
 
+export function getAccessToken () {
+  return localStorage.getItem('accessToken')
+}
+
 function _resetAuthData () {
   // reset userData in store
   $store.commit('user/SET_CURRENT_USER', {})
