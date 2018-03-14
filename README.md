@@ -4,6 +4,7 @@ This project based on real world practice and ready to use. Have a fun!
 ## Features
 - Http request class that implements API calls with Auth and tokens refresh based on Axios
 - Base API call methods
+- Response wrapper/Response error wrapper
 - Base common and layout components
 - Some help mixins
 
