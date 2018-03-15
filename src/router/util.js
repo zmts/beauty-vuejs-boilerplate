@@ -4,10 +4,10 @@ export function routePropResolver (routeOptions) {
   let resultQueryParams = {}
 
   Object.keys(query).forEach(key => {
-    if (Number(query[key]) && +query[key]) {
+    if (Number(query[key])) {
       resultQueryParams[key] = +query[key]
     }
-    if (String(query[key]) && query[key].length && !['0', 'null', 'undefined', 'NaN'].includes(query[key])) {
+    if ((typeof query[key] === 'string') && query[key].length && !['0', 'null', 'undefined', 'NaN'].includes(query[key])) {
       resultQueryParams[key] = query[key]
     }
   })
