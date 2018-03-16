@@ -18,12 +18,12 @@
 
 <script>
   import PostsService from '../services/posts.service'
-  import makeQueryParamsMixin from '../mixins/makeQueryParamsMixin'
+  import prepareQueryParamsMixin from '../mixins/prepareQueryParamsMixin'
   import prepareFetchParamsMixin from '../mixins/prepareFetchParamsMixin'
 
   export default {
     name: 'News',
-    mixins: [makeQueryParamsMixin, prepareFetchParamsMixin],
+    mixins: [prepareQueryParamsMixin, prepareFetchParamsMixin],
 
     props: {
       limit: {
@@ -78,7 +78,7 @@
 
     computed: {
       useInUrlQueryPropList () {
-        return this.makeQueryParamsMixin({
+        return this.prepareQueryParamsMixin({
           limit: this.pagination.limit,
           page: this.pagination.page
         })
