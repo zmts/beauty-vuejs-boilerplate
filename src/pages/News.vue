@@ -4,12 +4,15 @@
       <h1>{{ newsText }}</h1>
       <br><br>
     </div>
+
     <div class="news-list">
-      <div class="loading" v-if="!news.length"><h1>loading...</h1></div>
-      <div class="item" v-for="item in news">
-        {{item.title}}
-      </div>
+      <UiDataBox :loading="loading" :isEmpty="isEmpty" :error="error">
+        <div class="item" v-for="item in news">
+          {{item.title}}
+        </div>
+      </UiDataBox>
     </div>
+
   </div>
 </template>
 
@@ -87,6 +90,9 @@
         })
 
         return { ...pagination }
+      },
+      isEmpty () {
+        return !this.news.length
       }
     },
 

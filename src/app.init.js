@@ -1,4 +1,4 @@
-// global imports
+// third party imports
 import Vue from 'vue'
 import VueMaterial from 'vue-material'
 
@@ -8,7 +8,10 @@ import router from './router'
 import store from './store'
 import * as authService from './services/auth.service'
 import UsersService from './services/users.service'
-import globalHelpers from './global.helpers'
+import setGlobalHelpers from './global.helpers'
+
+// import local components
+import DataBox from './components/DataBox.vue'
 
 // mixins imports
 import currentUser from './mixins/currentUser'
@@ -20,8 +23,15 @@ import './scss/style.scss'
 
 Vue.config.productionTip = false
 
-globalHelpers()
+setGlobalHelpers()
+
+// use third party components
 Vue.use(VueMaterial)
+
+// set components as global
+Vue.component('UiDataBox', DataBox)
+
+// set global mixins
 Vue.mixin(currentUser)
 
 /* eslint-disable no-new */
