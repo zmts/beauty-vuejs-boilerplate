@@ -5,9 +5,12 @@ export default class PostsService extends BaseService {
     return 'posts'
   }
 
-  static getPosts () {
+  static getPosts (parameters = {}) {
+    const params = {
+      ...parameters
+    }
     return new Promise((resolve, reject) => {
-      return this.request().get(`${this.entity}`)
+      return this.request().get(`${this.entity}`, { params })
         .then(response => {
           let data = {
             content: response.data.data.results,

@@ -15,24 +15,83 @@
 
 <script>
   import PostsService from '../services/posts.service'
+  import makeQueryParamsMixin from '../mixins/makeQueryParamsMixin'
+  import prepareFetchParamsMixin from '../mixins/prepareFetchParamsMixin'
 
   export default {
     name: 'News',
-    data () {
-      return {
-        newsText: 'News Component !!!',
-        news: []
+    mixins: [makeQueryParamsMixin, prepareFetchParamsMixin],
+
+    props: {
+      limit: {
+        type: Number,
+        default: 10
+      },
+      page: {
+        type: Number,
+        default: 0
       }
     },
 
-    methods: {},
+    watch: {
+      'pagination': {
+        handler: function () {
+          this.$router.replace({
+            query: this.useInUrlQueryPropList
+          })
+          this.fetchData()
+        },
+        deep: true
+      }
+    },
 
-    mounted () {
-      PostsService.getPosts()
-        .then(response => {
-          this.news = response.data.content
+    data () {
+      return {
+        loading: false,
+        error: false,
+
+        newsText: 'NewsPage Component',
+        news: [],
+
+        pagination: {
+          limit: this.limit,
+          page: this.page,
+          total: 0
+        }
+      }
+    },
+
+    methods: {
+      fetchData () {
+        this.loading = true
+        PostsService.getPosts(this.fetchParams)
+          .then(response => {
+            this.news = response.data.content
+            this.pagination.total = response.data.total
+          }).catch(error => (this.error = error.message))
+          .finally(() => (this.loading = false))
+      }
+    },
+
+    computed: {
+      useInUrlQueryPropList () {
+        return this.makeQueryParamsMixin({
+          limit: this.pagination.limit,
+          page: this.pagination.page
         })
-        .catch(error => console.log(error.message))
+      },
+      fetchParams () {
+        const pagination = this.prepareFetchParamsMixin({
+          limit: this.pagination.limit,
+          page: this.pagination.page
+        })
+
+        return { ...pagination }
+      }
+    },
+
+    created () {
+      this.fetchData()
     }
   }
 </script>
