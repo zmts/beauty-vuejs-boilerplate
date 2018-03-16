@@ -28,6 +28,7 @@ export function routePropResolver (routeOptions) {
 export function isValidLimitQuery (limit) {
   return [20, 30, 40, 50, 100].includes(+limit)
 }
+
 /**
  * validate route page
  * API have default page equals to 0, so we don't need send it

@@ -1,4 +1,3 @@
-import forEach from 'lodash/forEach'
 import { isValidLimitQuery, isValidPageQuery } from '../router/util'
 
 /**
@@ -8,25 +7,25 @@ export default {
   methods: {
     prepareFetchParamsMixin (data) {
       let obj = {}
-      forEach(data, (item, prop) => {
-        if (Array.isArray((item)) && item.length) {
-          obj[prop] = item
+      Object.keys(data).forEach(key => {
+        if (Array.isArray((data[key])) && data[key].length) {
+          obj[key] = data[key]
         }
-        if (typeof item === 'boolean' && item) {
-          obj[prop] = item
+        if (typeof data[key] === 'boolean' && data[key]) {
+          obj[key] = data[key]
         }
-        if (typeof item === 'string' && item.length) {
-          obj[prop] = item
+        if (typeof data[key] === 'string' && data[key].length) {
+          obj[key] = data[key]
         }
-        if ((typeof item === 'number') && item) {
-          obj[prop] = item
+        if ((typeof data[key] === 'number') && data[key]) {
+          obj[key] = data[key]
         }
 
-        if ((prop === 'limit') && !isValidLimitQuery(+item)) {
-          delete obj[prop]
+        if ((key === 'limit') && !isValidLimitQuery(+data[key])) {
+          delete obj[key]
         }
-        if ((prop === 'page') && !isValidPageQuery(+item)) {
-          delete obj[prop]
+        if ((key === 'page') && !isValidPageQuery(+data[key])) {
+          delete obj[key]
         }
       })
 
