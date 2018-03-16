@@ -9,22 +9,26 @@ import loginPage from '../pages/Login.vue'
 import notFoundPage from '../pages/NotFound.vue'
 
 import { routePropResolver } from './util'
+import { DOMAIN_TITLE } from '../.env'
 
 export const routes = [
   {
     path: '/',
     name: 'index',
-    component: homePage
+    component: homePage,
+    meta: { title: `${DOMAIN_TITLE} | home` }
   },
   {
     path: '/news',
     name: 'news',
     component: newsPage,
+    meta: { title: `${DOMAIN_TITLE} | news` },
     props: routePropResolver
   },
   {
     path: '/profile',
     component: profilePage,
+    meta: { title: `${DOMAIN_TITLE} | profile` },
     children: [
       {
         path: '',
@@ -36,10 +40,12 @@ export const routes = [
   {
     path: '/login',
     name: 'login',
-    component: loginPage
+    component: loginPage,
+    meta: { title: `${DOMAIN_TITLE} | login` }
   },
   {
     path: '*',
-    component: notFoundPage
+    component: notFoundPage,
+    meta: { title: `${DOMAIN_TITLE} | not found` }
   }
 ]
