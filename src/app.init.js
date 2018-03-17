@@ -49,6 +49,15 @@ new Vue({
     }
   },
 
+  mounted () {
+    store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth)
+    window.addEventListener('resize', () => store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth))
+  },
+
+  beforeDestroy () {
+    window.removeEventListener('resize', () => store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth))
+  },
+
   methods: {
 
     /**
