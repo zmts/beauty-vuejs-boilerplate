@@ -2,8 +2,12 @@ export default {
   namespaced: true,
   state: {
     windowWidth: 0,
-    mobileMaxWidth: 320,
-    tabletMaxWidth: 1000
+    /**
+     * breakpoint constants
+     */
+    widthExtraSmall: 320,
+    widthSmall: 640,
+    widthTablet: 1024
   },
 
   mutations: {
@@ -13,7 +17,9 @@ export default {
   },
 
   getters: {
-    isMobile: (state) => state.windowWidth <= state.mobileMaxWidth,
-    isTablet: (state) => (state.windowWidth <= state.tabletMaxWidth) && (state.windowWidth > state.mobileMaxWidth)
+    isExtraSmall: (state) => state.windowWidth <= state.widthExtraSmall,
+    isSmall: (state) => state.windowWidth <= state.widthSmall,
+    isTablet: (state) => state.windowWidth <= state.widthTablet,
+    isDesktop: (state) => state.windowWidth > state.widthTablet
   }
 }
