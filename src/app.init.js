@@ -6,8 +6,6 @@ import VueMaterial from 'vue-material'
 import AppLayout from './layout/index.vue'
 import router from './router'
 import store from './store'
-import * as authService from './services/auth.service'
-import UsersService from './services/users.service'
 import setGlobalHelpers from './global.helpers'
 
 // import local components
@@ -43,12 +41,6 @@ new Vue({
   router,
   store,
 
-  created () {
-    if (authService.getRefreshToken()) {
-      this.initAppState()
-    }
-  },
-
   mounted () {
     store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth)
     window.addEventListener('resize', () => store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth))
@@ -56,18 +48,5 @@ new Vue({
 
   beforeDestroy () {
     window.removeEventListener('resize', () => store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth))
-  },
-
-  methods: {
-
-    /**
-     * refresh tokens and init currentUser data in store
-     */
-    initAppState () {
-      authService.refreshTokens()
-        .then(() => UsersService.getCurrent())
-        .then(user => store.commit('user/SET_CURRENT_USER', user.data))
-        .catch(error => console.log(error))
-    }
   }
 })

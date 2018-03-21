@@ -28,7 +28,7 @@ export const routes = [
   {
     path: '/profile',
     component: profilePage,
-    meta: { title: `${DOMAIN_TITLE} | profile` },
+    meta: { isAuth: true, title: `${DOMAIN_TITLE} | profile` },
     children: [
       {
         path: '',
