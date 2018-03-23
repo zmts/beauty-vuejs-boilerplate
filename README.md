@@ -70,6 +70,19 @@ Root app initialization file.
 ### `global.helpers.js`
 Add global helpers to window object.
 
+## Checkpoints
+
+### Where app initialize current user state ?
+`/src/router/index.js` >> `initCurrentUserStateMiddleware`.
+Each time app loads middleware check refresh token and fetch current user if token exist.
+
+### Where app check access permissions ?
+`/src/router/index.js` >> `checkAccessMiddleware`.
+Each time user change route, app check permissions to route.
+
+### How to declare global SCSS variables/mixins etc... ?
+In `/build/utils.js` // TODO
+
 ## Build Setup
 ``` bash
 # install dependencies
