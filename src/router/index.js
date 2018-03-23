@@ -20,14 +20,15 @@ const router = new Router({
  * @WARN Must be always first in middleware chain
  */
 function initCurrentUserStateMiddleware (to, from, next) {
-  if (authService.getRefreshToken() && !$store.state.user.currentUser.id) {
+  const currentUserId = $store.state.user.currentUser.id
+
+  if (authService.getRefreshToken() && !currentUserId) {
     return authService.refreshTokens()
       .then(() => UsersService.getCurrent())
       .then(user => $store.commit('user/SET_CURRENT_USER', user.data))
       .then(() => next())
       .catch(error => console.log(error))
   }
-
   next()
 }
 
@@ -45,6 +46,7 @@ function checkAccessMiddleware (to, from, next) {
 
 function setPageTitleMiddleware (to, from, next) {
   const pageTitle = to.matched.find(item => item.meta.title)
+
   if (pageTitle) window.document.title = pageTitle.meta.title
   next()
 }
