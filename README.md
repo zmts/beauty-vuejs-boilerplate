@@ -81,7 +81,7 @@ Each time app loads middleware check refresh token and fetch current user if tok
 Each time user change route, app check permissions to route.
 
 ### How to declare global SCSS variables/mixins etc... ?
-In `/build/utils.js` // TODO
+In `/build/utils.js` >> `generateLoaders('sass')`
 
 ## Build Setup
 ``` bash
