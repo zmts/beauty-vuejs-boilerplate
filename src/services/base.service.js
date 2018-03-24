@@ -9,7 +9,9 @@ export default class BaseService {
   }
 
   /**
+   * ------------------------------
    * @HELPERS
+   * ------------------------------
    */
 
   request (status = {auth: false}) {
@@ -25,7 +27,9 @@ export default class BaseService {
   }
 
   /**
-   * @API_CALLS
+   * ------------------------------
+   * @API_CALLS_PUBLIC
+   * ------------------------------
    */
 
   getListPublic (parameters = {}) {
@@ -40,8 +44,7 @@ export default class BaseService {
             total: response.data.data.total
           }
           resolve(this.responseWrapper(response, data))
-        })
-        .catch(error => {
+        }).catch(error => {
           let message = error.response.data ? error.response.data.error : error.response.statusText
           reject(this.errorWrapper(error, message))
         })
@@ -58,6 +61,12 @@ export default class BaseService {
         })
     })
   }
+
+  /**
+   * ------------------------------
+   * @API_CALLS_PRIVATE
+   * ------------------------------
+   */
 
   getById (id = window.required()) {
     return new Promise((resolve, reject) => {
