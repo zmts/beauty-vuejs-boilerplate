@@ -1,22 +1,11 @@
 import BaseService from './base.service'
 
-export default class UsersService extends BaseService {
-  static get entity () {
+class UsersService extends BaseService {
+  get entity () {
     return 'users'
   }
 
-  static getById (user_id = window.required()) {
-    return new Promise((resolve, reject) => {
-      return this.request({auth: true}).get(`${this.entity}/${user_id}`)
-        .then(response => resolve(this.responseWrapper(response, response.data.data)))
-        .catch(error => {
-          let message = error.response.data ? error.response.data.error : error.response.statusText
-          reject(this.errorWrapper(error, message))
-        })
-    })
-  }
-
-  static getCurrent () {
+  getCurrent () {
     return new Promise((resolve, reject) => {
       return this.request({auth: true}).get(`${this.entity}/current`)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))
@@ -27,7 +16,7 @@ export default class UsersService extends BaseService {
     })
   }
 
-  static getPostsByUserId (user_id = window.required()) {
+  getPostsByUserId (user_id = window.required()) {
     return new Promise((resolve, reject) => {
       return this.request({auth: true}).get(`${this.entity}/${user_id}/posts`)
         .then(response => {
@@ -44,3 +33,5 @@ export default class UsersService extends BaseService {
     })
   }
 }
+
+export default new UsersService()

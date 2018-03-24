@@ -67,7 +67,7 @@
     methods: {
       fetchData () {
         this.loading = true
-        PostsService.getPosts(this.fetchParams)
+        PostsService.getListPublic(this.fetchParams)
           .then(response => {
             this.news = response.data.content
             this.pagination.total = response.data.total
