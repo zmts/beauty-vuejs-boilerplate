@@ -1,36 +1,51 @@
-// third party imports
+// third party
 import Vue from 'vue'
 import VueMaterial from 'vue-material'
 
-// app imports
+// main
 import AppLayout from './layout/index.vue'
 import router from './router'
 import store from './store'
 import setGlobalHelpers from './global.helpers'
+import globalEventBus from './plugins/globalEventBus'
 
-// import local components
+// global components
 import DataBox from './components/DataBox.vue'
 
-// mixins imports
+// mixins
 import currentUser from './mixins/currentUser'
 
-// styles imports
+// styles
 import 'vue-material/dist/vue-material.css'
 import './assets/fonts/bebasneue.css'
 import './scss/style.scss'
 
-Vue.config.productionTip = false
+/**
+ * ------------------------------
+ * Initialization
+ * ------------------------------
+ */
 
 setGlobalHelpers()
+Vue.config.productionTip = false
 
-// use third party components
+// third party components
 Vue.use(VueMaterial)
 
-// set components as global
+// plugins
+Vue.use(globalEventBus)
+
+// global components
 Vue.component('UiDataBox', DataBox)
 
-// set global mixins
+// global mixins
 Vue.mixin(currentUser)
+
+/**
+ * ------------------------------
+ * App intance
+ * ------------------------------
+ */
 
 /* eslint-disable no-new */
 new Vue({
