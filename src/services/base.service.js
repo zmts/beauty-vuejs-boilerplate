@@ -81,7 +81,7 @@ export default class BaseService {
 
   create (data = window.required()) {
     return new Promise((resolve, reject) => {
-      new Http({auth: true}).post(`${this.entity}`, data)
+      return this.request({auth: true}).post(`${this.entity}`, data)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))
         .catch(error => reject(this.errorWrapper(error)))
     })
@@ -89,7 +89,7 @@ export default class BaseService {
 
   update (id = window.required(), data = window.required()) {
     return new Promise((resolve, reject) => {
-      new Http({auth: true}).patch(`${this.entity}/${id}`, data)
+      return this.request({auth: true}).patch(`${this.entity}/${id}`, data)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))
         .catch(error => reject(this.errorWrapper(error)))
     })
@@ -97,7 +97,7 @@ export default class BaseService {
 
   remove (id = window.required()) {
     return new Promise((resolve, reject) => {
-      new Http({auth: true}).delete(`${this.entity}/${id}`)
+      return this.request({auth: true}).delete(`${this.entity}/${id}`)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))
         .catch(error => reject(this.errorWrapper(error)))
     })
