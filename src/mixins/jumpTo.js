@@ -19,6 +19,6 @@ export default {
 //   this.$v.$touch()
 // // must be used only after touch function
 //   this.$nextTick(() => {
-//     if (this.$v.$invalid) this.jumpToError('.error-message.component.active')
+//     if (this.$v.item.$invalid) this.jumpTo('.is-error')
 //   });
 // };
