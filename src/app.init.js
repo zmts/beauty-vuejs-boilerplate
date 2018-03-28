@@ -14,6 +14,7 @@ import DataBox from './components/DataBox.vue'
 
 // mixins
 import currentUser from './mixins/currentUser'
+import jumpTo from './mixins/jumpTo'
 
 // styles
 import 'vue-material/dist/vue-material.css'
@@ -40,6 +41,7 @@ Vue.component('UiDataBox', DataBox)
 
 // global mixins
 Vue.mixin(currentUser)
+Vue.mixin(jumpTo)
 
 /**
  * ------------------------------
