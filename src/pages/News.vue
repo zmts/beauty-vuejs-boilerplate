@@ -6,11 +6,11 @@
     </div>
 
     <div class="news-list">
-      <UiDataBox :loading="loading" :isEmpty="isEmpty" :error="error">
-        <div class="item" v-for="item in news">
+      <DataBox :loading="loading" :isEmpty="isEmpty" :error="error">
+        <div class="item" v-for="item in news" :key="item.id">
           {{item.title}}
         </div>
-      </UiDataBox>
+      </DataBox>
     </div>
 
   </div>
@@ -21,9 +21,14 @@
   import prepareQueryParamsMixin from '../mixins/prepareQueryParamsMixin'
   import prepareFetchParamsMixin from '../mixins/prepareFetchParamsMixin'
 
+  import DataBox from '../components/DataBox'
+
   export default {
     name: 'News',
     mixins: [prepareQueryParamsMixin, prepareFetchParamsMixin],
+    components: {
+      DataBox
+    },
 
     props: {
       limit: {

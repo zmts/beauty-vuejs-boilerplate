@@ -9,9 +9,6 @@ import store from './store'
 import setGlobalHelpers from './global.helpers'
 import globalEventBus from './plugins/globalEventBus'
 
-// global components
-import DataBox from './components/DataBox.vue'
-
 // mixins
 import currentUser from './mixins/currentUser'
 import jumpTo from './mixins/jumpTo'
@@ -35,9 +32,6 @@ Vue.use(VueMaterial)
 
 // plugins
 Vue.use(globalEventBus)
-
-// global components
-Vue.component('UiDataBox', DataBox)
 
 // global mixins
 Vue.mixin(currentUser)
