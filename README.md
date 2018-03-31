@@ -44,7 +44,7 @@ App config files.
 Base app layout components.
 
 ### `mixins`
-- One file mixin principle
+- One mixin per file principle
 - Local(not global) mixin filename === mixin method/prop name principle (setModelMixin.js === setModelMixin)
 - Global mixins names from `$` principle
 
