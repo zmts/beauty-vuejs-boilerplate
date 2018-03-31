@@ -3,7 +3,7 @@ This project based on real world practice and ready to use. Have a fun!
 
 ## Features
 - Http request class that implements API calls with Auth and tokens refresh based on Axios
-- Base API call methods
+- Data access layer/API calls
 - Response wrapper/Response error wrapper
 - Base common and layout components
 - Some help mixins
@@ -44,7 +44,10 @@ App config files.
 Base app layout components.
 
 ### `mixins`
-Mixins helpers. (Declare global mixins as `$someMixinName.js`). 
+Mixins helpers.
+- One file one mixin principle
+- Local(not global) mixin filename === mixin method/prop name principle (setModelMixin.js === setModelMixin)
+- Global mixins names from `$` principle
 
 ### `pages`
 Page wrapper components(Pages) and Local components.
@@ -56,7 +59,7 @@ Router instance and routing declaration.
 Style files(partials, variables, mixins, reset).
 
 ### `services`
-API layer.
+Data access layer/API calls. API calls must be represented in separate classes (not in vuex action).
 
 ### `store`
 App store and modules.
