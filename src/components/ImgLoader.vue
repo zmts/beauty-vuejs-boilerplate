@@ -28,6 +28,13 @@
       }
     },
 
+    watch: {
+      src: {
+        handler: 'checkLoadingStatus',
+        immediate: true
+      }
+    },
+
     data () {
       return {
         loading: true,
@@ -47,10 +54,6 @@
           }
         }, 250)
       }
-    },
-
-    mounted () {
-      this.checkLoadingStatus()
     }
   }
 </script>
