@@ -1,10 +1,9 @@
 <template>
   <div class="img-loader component">
-    <img :src="src" :alt="alt" ref="image" v-show="!error && !loading">
-    <div class="loading" v-if="!error && loading">
+    <img :src="src" :alt="alt" ref="image" v-show="!loading">
+    <div class="loading" v-if="loading">
       <PulseLoading></PulseLoading>
     </div>
-    <div class="error" v-if="error && !loading">image loading fails. reload page</div>
   </div>
 </template>
 
@@ -12,7 +11,6 @@
   /**
    * @description Component check image loading status and show loading animation if image still not loaded
    */
-  import imagesloaded from 'imagesloaded'
   import PulseLoading from './PulseLoading.vue'
 
   export default {
@@ -30,12 +28,6 @@
       }
     },
 
-    watch: {
-      src: function () {
-        this.checkLoadingStatus()
-      }
-    },
-
     data () {
       return {
         loading: true,
@@ -45,14 +37,15 @@
 
     methods: {
       checkLoadingStatus () {
-        imagesloaded(this.$refs.image, instance => {
-          if (instance.hasAnyBroken) {
-            this.error = true
-          } else {
-            this.error = false
+        let interval = setInterval(() => {
+          if (this.$refs.image) {
+            this.loading = !this.$refs.image.complete
+
+            if (!this.loading) {
+              clearInterval(interval)
+            }
           }
-          this.loading = false
-        })
+        }, 250)
       }
     },
 

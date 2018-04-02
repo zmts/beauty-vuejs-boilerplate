@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
-    "imagesloaded": "^4.1.4",
     "moment": "^2.21.0",
     "vue": "^2.5.13",
     "vue-material": "0.8.1",
