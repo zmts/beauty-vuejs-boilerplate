@@ -1,6 +1,9 @@
 <template>
   <div class="img-loader component">
-    <img :src="src" :alt="alt" ref="image" v-show="!loading">
+    <div class="img-container" :class="{'is-loaded': !loading}">
+      <img :src="src" :alt="alt" ref="image">
+    </div>
+
     <div class="loading" v-if="loading">
       <PulseLoading></PulseLoading>
     </div>
@@ -44,13 +47,11 @@
 
     methods: {
       checkLoadingStatus () {
+        this.loading = true
         let interval = setInterval(() => {
-          if (this.$refs.image) {
-            this.loading = !this.$refs.image.complete
-
-            if (!this.loading) {
-              clearInterval(interval)
-            }
+          if (this.$refs.image.complete) {
+            this.loading = false
+            clearInterval(interval)
           }
         }, 250)
       }
@@ -65,5 +66,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    .img-container {
+      transition: width .2s;
+      width: 0;
+      height: 100%;
+      &.is-loaded {
+        width: 100%;
+      }
+    }
   }
 </style>
