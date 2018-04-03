@@ -1,7 +1,7 @@
 <template>
   <div class="img-loader component">
-    <div class="img-container" :class="{'is-loaded': !loading}">
-      <img :src="src" :alt="alt" ref="image">
+    <div class="img-container" :class="{'is-loaded': !loading, 'is-animated': animated}">
+      <img :src="src" :alt="alt" ref="image" v-show="!loading">
     </div>
 
     <div class="loading" v-if="loading">
@@ -28,6 +28,10 @@
       src: {
         type: String,
         required: true
+      },
+      animated: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -68,8 +72,11 @@
     align-items: center;
     .img-container {
       transition: width .2s;
-      width: 0;
+      width: 100%;
       height: 100%;
+      &.is-animated {
+        width: 0;
+      }
       &.is-loaded {
         width: 100%;
       }
