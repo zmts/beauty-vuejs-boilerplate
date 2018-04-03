@@ -65,11 +65,15 @@
 
 <style lang="scss" scoped>
   .img-loader.component {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    .loading {
+      position: absolute;
+    }
     .img-container {
       transition: width .2s;
       width: 100%;
