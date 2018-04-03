@@ -53,7 +53,7 @@
       checkLoadingStatus () {
         this.loading = true
         let interval = setInterval(() => {
-          if (this.$refs.image.complete) {
+          if (this.$refs.image && this.$refs.image.complete) {
             this.loading = false
             clearInterval(interval)
           }
