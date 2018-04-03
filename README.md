@@ -14,6 +14,7 @@ This project based on real world practice and ready to use. Have a fun!
   - [`assets`](#assets)
   - [`components`](#components)
   - [`config`](#config)
+  - [`directives`](#directives)
   - [`layout`](#layout)
   - [`mixins`](#mixins)
   - [`pages`](#pages)
@@ -39,6 +40,9 @@ Shared components folder.
 
 ### `config`
 App config files.
+
+### `directives`
+Directives.
 
 ### `layout`
 Base app layout components.
@@ -85,8 +89,25 @@ Each time user change route, app check permissions to route.
 ### How to declare global SCSS variables/mixins etc... ?
 In `/build/utils.js` >> `generateLoaders('sass')`
 
+## Utils/Helpers
+
+###  What about debounce ?
+```
+import debounce from '../directives/debounce'
+directives: {
+  debounce
+}
+```
+And use it in template.
+```
+<input type="text" v-model="name" v-debounce="500" @debounce-change="runSomeMethod">
+```
+
 ## Build Setup
 ``` bash
+# clone repo
+git clone https://github.com/zmts/vuejs-boilerplate.git
+
 # install dependencies
 npm install
 
