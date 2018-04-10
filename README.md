@@ -18,6 +18,7 @@ This project based on real world practice and ready to use. Have a fun!
   - [`layout`](#layout)
   - [`mixins`](#mixins)
   - [`pages`](#pages)
+  - [`plugins`](#plugins)
   - [`router`](#router)
   - [`scss`](#scss)
   - [`services`](#services)
@@ -37,35 +38,68 @@ Images/Fonts/Other media stuff.
 
 ### `components`
 Shared components folder.
+ - `DataBox` wrap in this component any fetchible data. It represents loading(spinloader animation), error and empty statuses (examaple in `src/pages/News.vue`).
+ - `ImgLoader` - `img` tag wrapper with. Shows image loading(pulseloader animation) status and animate onloading as option.
+ - `ModelWindow` - simple modal window.
+ - `PulseLoading` and `SpinnerWave` - loading animation.
+ - `UploadMulti` and `UploadSingle` - file upload example components.
+ - ...
 
 ### `config`
-App config files.
+App config files. Each category in separate file.
 
 ### `directives`
 Directives.
+- Handy debounce directive
 
 ### `layout`
 Base app layout components.
+- `Header`, `Footer` components and main layout wrapper.
 
 ### `mixins`
 - One mixin per file principle
 - Local(not global) mixin filename === mixin method/prop name principle (setModelMixin.js === setModelMixin)
 - Global mixins names from `$` principle
+- `currentUser` - includes current user object from store. Global.
+- `formatDateTime` - Datetime moment formatters. Global.
+- `jumpTo` - just jumt to some DOM element. Global.
+- `prepareFetchParamsMixin` - prepare params for data fetching (examaple in `src/pages/News.vue`)
+- `prepareQueryParamsMixin` - prepare params for setting it in URL (examaple in `src/pages/News.vue`)
+- `setModelMixin` - uses to set same fields from response that declared in front-end model
 
 ### `pages`
 Page wrapper components(Pages) and Local components.
 
+### `plugins`
+- `globalEventBus` - global event bus. $bus
+
 ### `router`
 Router instance and routing declaration.
+- `index` - router initialization.
+- `routes` - routing.
+- `middlewares`:
+  - `initCurrentUserStateMiddleware` - Current user state initialization (each time app loads, check refresh token and fetch current user if token exist.)
+  - `checkAccessMiddleware` - Each time user change route, check permissions to route.
+  - `setPageTitleMiddleware` - Each time user change route, set page title.
+- `util`:
+  - `routePropResolver` - pass params from URL to component as props (example in `src/router/routes.js`)
 
 ### `scss`
 Style files(partials, variables, mixins, reset).
 
 ### `services`
-Data access layer/API calls. API calls must be represented in separate classes (not in vuex action).
+Data access layer/API calls.
+- ES6 API calls classes.
+- API calls must be represented in separate classes (not in vuex action).
+- `auth.service` - Auth methods and API calls.
+- `http.init` - Http request class.
+- `util`:
+  - `ResponseWrapper` - Represent response object.
+  - `ErrorWrapper` - Represent error object.
+  - `clearData` - Uses to clear request data before send it. Helper.
 
 ### `store`
-App store and modules.
+App store with separate modules.
 
 ### `.env.js`
 Environment variables (add this to git ignore).
@@ -74,17 +108,7 @@ Environment variables (add this to git ignore).
 Root app initialization file.
 
 ### `global.helpers.js`
-Add global helpers to window object.
-
-## Checkpoints
-
-### Where app initialize current user state ?
-`/src/router/index.js` >> `initCurrentUserStateMiddleware`.
-Each time app loads middleware check refresh token and fetch current user if token exist.
-
-### Where app check access permissions ?
-`/src/router/index.js` >> `checkAccessMiddleware`.
-Each time user change route, app check permissions to route.
+Add global helpers to window object. Yepp globals ... =)
 
 ### How to declare global SCSS variables/mixins etc... ?
 In `/build/utils.js` >> `generateLoaders('sass')`
