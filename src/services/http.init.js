@@ -1,6 +1,6 @@
 /**
- * request constructor class
- * if auth is required return patched axios instance
+ * HTTP request layer
+ * if auth is required return patched axios instance(with access token in headers)
  * else return clear axios instance
  */
 
@@ -16,6 +16,10 @@ export default class Http {
       baseURL: API_URL
     })
 
+    return this.init()
+  }
+
+  init () {
     if (this.isAuth) {
       this.instance.interceptors.request.use(request => {
         request.headers['token'] = authService.getAccessToken()
