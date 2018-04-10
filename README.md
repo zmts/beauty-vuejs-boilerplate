@@ -38,12 +38,12 @@ Images/Fonts/Other media stuff.
 
 ### `components`
 Shared components folder.
- - `DataBox` wrap in this component any fetchible data. It represents loading(spinloader animation), error and empty statuses (examaple in `src/pages/News.vue`).
- - `ImgLoader` - `img` tag wrapper with. Shows image loading(pulseloader animation) status and animate onloading as option.
- - `ModelWindow` - simple modal window.
- - `PulseLoading` and `SpinnerWave` - loading animation.
- - `UploadMulti` and `UploadSingle` - file upload example components.
- - ...
+- `DataBox` wrap in this component any received data. It represents loading(spinloader animation), error and empty statuses (examaple in `src/pages/News.vue`).
+- `ImgLoader` - `img` tag wrapper with. Shows image loading(pulseloader animation) status and animate onloading as option.
+- `ModelWindow` - simple modal window.
+- `PulseLoading` and `SpinnerWave` - loading animation.
+- `UploadMulti` and `UploadSingle` - file upload example components.
+- ...
 
 ### `config`
 App config files. Each category in separate file.
