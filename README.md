@@ -40,7 +40,7 @@ Images/Fonts/Other media stuff.
 Shared components folder.
 - `DataBox` wrap in this component any received data. It represents loading(spinloader animation), error and empty statuses (examaple in `src/pages/News.vue`).
 - `ImgLoader` - `img` tag wrapper. Shows image loading(pulseloader animation) status and animate onloading as option.
-- `ModelWindow` - simple modal window.
+- `ModalWindow` - simple modal window.
 - `PulseLoading` and `SpinnerWave` - loading animation.
 - `UploadMulti` and `UploadSingle` - file upload example components.
 - ...
@@ -57,21 +57,20 @@ Base app layout components.
 - `Header`, `Footer` components and main layout wrapper.
 
 ### `mixins`
-- One mixin per file principle
-- Local(not global) mixin filename === mixin method/prop name principle (setModelMixin.js === setModelMixin)
-- Global mixins names from `$` principle
-- `currentUser` - includes current user object from store. Global.
+- One method/prop per file principle.
+- Name files same as method/prop.
+- `currentUser` - Includes current user object from store. Global.
 - `formatDateTime` - Datetime moment formatters. Global.
-- `jumpTo` - just jumt to some DOM element. Global.
-- `prepareFetchParamsMixin` - prepare params for data fetching (examaple in `src/pages/News.vue`)
-- `prepareQueryParamsMixin` - prepare params for setting it in URL (examaple in `src/pages/News.vue`)
-- `setModelMixin` - uses to set same fields from response that declared in front-end model
+- `jumpTo` - Help jump to some DOM element. Global.
+- `prepareFetchParamsMixin` - Prepare params for data fetching (examaple in `src/pages/News.vue`).
+- `prepareQueryParamsMixin` - Prepare params for setting it in URL (examaple in `src/pages/News.vue`).
+- `setModelMixin` - Use to set same fields from response that declared in front-end model.
 
 ### `pages`
 Page wrapper components(Pages) and Local components.
 
 ### `plugins`
-- `globalEventBus` - global event bus. $bus
+- `globalEventBus` - $bus.
 
 ### `router`
 Router instance and routing declaration.
@@ -82,7 +81,7 @@ Router instance and routing declaration.
   - `checkAccessMiddleware` - Each time user change route, check permissions to route.
   - `setPageTitleMiddleware` - Each time user change route, set page title.
 - `util`:
-  - `routePropResolver` - pass params from URL to component as props (example in `src/router/routes.js`)
+  - `routePropResolver` - Pass params from URL to component as props (example in `src/router/routes.js`)
 
 ### `scss`
 Style files(partials, variables, mixins, reset).
