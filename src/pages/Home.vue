@@ -1,8 +1,8 @@
 <template>
   <div class="home page">
-    <h1>{{msg}}</h1>
+    <h1>{{ msg }}</h1>
     <button @click="isShownModal = true">show modal</button>
-    <button @click="showToast">show toast</button>
+    <button class="show-toast" @click="showToast">show toast</button>
     <ModalWindow
       closeOnOverlay
       @close="onCloseModal"
@@ -33,8 +33,15 @@
         this.isShownModal = false
       },
       showToast () {
-        this.$store.commit('dom/TOAST', {message: 'lol'})
+        this.$store.commit('dom/TOAST', {type: 'success', message: 'lol'})
       }
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .show-toast{
+    position: absolute;
+    right: 10px;
+  }
+</style>

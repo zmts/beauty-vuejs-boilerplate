@@ -1,6 +1,3 @@
-import Vue from 'vue'
-import UiToast from '../../components/UiToast'
-
 export default {
   namespaced: true,
   state: {
@@ -10,7 +7,8 @@ export default {
      */
     widthExtraSmall: 320,
     widthSmall: 640,
-    widthTablet: 1024
+    widthTablet: 1024,
+    toastsList: []
   },
 
   mutations: {
@@ -18,16 +16,20 @@ export default {
       state.windowWidth = value
     },
     TOAST (state, payload) {
-      let isPayloadString = typeof payload === 'string'
-      let Toast = Vue.extend(UiToast)
+      let toast = {
+        id: new Date().getTime(),
+        message: typeof payload === 'string' ? payload : payload.message,
+        duration: payload.duration || 0,
+        type: payload.type || 'default'
+      }
 
-      let newToast = new Toast({
-        propsData: {
-          message: isPayloadString ? payload : payload.message,
-          duration: isPayloadString ? 5000 : payload.duration
-        }
-      }).$mount()
-      document.querySelector('.ui-toast-list-wrapper').appendChild(newToast.$el)
+      state.toastsList.push({ ...toast })
+    },
+    TOAST_REMOVE (state, payload) {
+      state.toastsList = state.toastsList.filter(({id}) => id !== payload.id)
+    },
+    TOAST_LIST_CLEAR (state) {
+      state.toastsList = []
     }
   },
 

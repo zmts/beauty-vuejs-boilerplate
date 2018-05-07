@@ -1,6 +1,9 @@
 <template>
-  <div class="ui-toast component" @click="close">
-    {{ message }}
+  <div
+    class="ui-toast component"
+    :class="classList"
+    @click="remove">
+    {{ item.message }}
   </div>
 </template>
 
@@ -8,31 +11,36 @@
   export default {
     name: 'UiToast',
     props: {
-      message: {
-        type: String,
-        default: 'Hello'
-      },
-      duration: {
-        type: Number,
-        default: 5000
+      item: {
+        type: Object
       }
     },
 
     methods: {
-      close () {
-        this.$destroy()
+      remove () {
+        this.$emit('remove', this.item.id)
+      }
+    },
+
+    computed: {
+      classList () {
+        return {
+          default: this.item.type === 'default',
+          success: this.item.type === 'success',
+          info: this.item.type === 'info',
+          warning: this.item.type === 'warning',
+          error: this.item.type === 'error'
+        }
       }
     },
 
     mounted () {
-      let timer = setTimeout(() => {
-        clearTimeout(timer)
-        this.close()
-      }, this.duration)
-    },
-
-    destroyed () {
-      this.$el.remove()
+      if (this.item.duration) {
+        let timer = setTimeout(() => {
+          clearTimeout(timer)
+          this.remove()
+        }, this.item.duration)
+      }
     }
   }
 </script>
@@ -41,7 +49,21 @@
   .ui-toast.component {
     padding: 20px;
     background-color: $color-white;
-    border: 1px solid $color-line;
-    margin: 20px;
+    margin: 20px 0;
+    &.default {
+      border-left: 5px solid $color-line;
+    }
+    &.success {
+      border-left: 5px solid green;
+    }
+    &.info {
+      border-left: 5px solid blue;
+    }
+    &.warning {
+      border-left: 5px solid orange;
+    }
+    &.error {
+      border-left: 5px solid red;
+    }
   }
 </style>
