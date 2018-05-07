@@ -126,6 +126,12 @@ And use it in template.
 <input type="text" v-model="name" v-debounce="500" @debounce-change="runSomeMethod">
 ```
 
+### Notifications/Toast:
+Just make mutation
+```
+commit('dom/TOAST', { message: 'hello', duration: 2000 })
+```
+
 ## Build Setup
 ``` bash
 # clone repo
