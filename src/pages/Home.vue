@@ -2,6 +2,7 @@
   <div class="home page">
     <h1>{{msg}}</h1>
     <button @click="isShownModal = true">show modal</button>
+    <button @click="showToast">show toast</button>
     <ModalWindow
       closeOnOverlay
       @close="onCloseModal"
@@ -30,6 +31,9 @@
     methods: {
       onCloseModal () {
         this.isShownModal = false
+      },
+      showToast () {
+        this.$store.commit('dom/TOAST', {message: 'lol'})
       }
     }
   }

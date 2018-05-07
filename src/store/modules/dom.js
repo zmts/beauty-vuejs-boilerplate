@@ -1,3 +1,6 @@
+import Vue from 'vue'
+import UiToast from '../../components/UiToast'
+
 export default {
   namespaced: true,
   state: {
@@ -13,6 +16,18 @@ export default {
   mutations: {
     SET_WINDOW_WIDTH (state, value) {
       state.windowWidth = value
+    },
+    TOAST (state, payload) {
+      let isPayloadString = typeof payload === 'string'
+      let Toast = Vue.extend(UiToast)
+
+      let newToast = new Toast({
+        propsData: {
+          message: isPayloadString ? payload : payload.message,
+          duration: isPayloadString ? 5000 : payload.duration
+        }
+      }).$mount()
+      document.querySelector('.ui-toast-list-wrapper').appendChild(newToast.$el)
     }
   },
 

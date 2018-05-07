@@ -148,6 +148,6 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 # TODO
 - Integrate strong FLUX architecture
-- Add toast
-- Add global loading component
 - Refact imports in `app.init`
+- Add global loading component
+- Add more examples

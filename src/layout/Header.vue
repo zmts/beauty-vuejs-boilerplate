@@ -1,5 +1,7 @@
 <template>
   <div class="header wrapper">
+    <UiToastListWrapper/>
+
     <div class="menu-wrapper">
       <ul class="menu">
         <li>
@@ -26,11 +28,13 @@
 
 <script>
   //    import AppLogin from '@/components/login.component'
+  import UiToastListWrapper from '@/components/UiToastListWrapper'
   import * as authService from '../services/auth.service'
 
   export default {
     name: 'Header',
     components: {
+      UiToastListWrapper
 //            AppLogin
     },
     methods: {
