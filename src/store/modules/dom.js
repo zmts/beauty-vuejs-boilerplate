@@ -19,8 +19,8 @@ export default {
       let toast = {
         id: new Date().getTime(),
         message: typeof payload === 'string' ? payload : payload.message,
-        duration: payload.duration || 0,
-        type: payload.type || 'default'
+        type: payload.type || 'default',
+        duration: payload.type === 'error' ? 0 : payload.duration || 5000
       }
 
       state.toastsList.push({ ...toast })

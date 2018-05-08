@@ -47,6 +47,7 @@
 <style lang="scss" scoped>
   .ui-toast-list.component {
     top: 50px;
+    left: 50px;
     width: 300px;
     position: fixed;
     z-index: 9999;

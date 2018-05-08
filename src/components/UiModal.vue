@@ -1,6 +1,6 @@
 <template>
   <transition name="modal">
-    <div class="modal-window overlay component" v-if="showLocal" @click="onClickOverlay" ref="overlay">
+    <div class="modal-window overlay component" v-if="show" @click="onClickOverlay" ref="overlay">
         <div class="modal-content">
           <div class="header">
             <span class="close" @click="close" v-if="showCloseButton">close</span>
@@ -14,6 +14,7 @@
 <script>
   export default {
     name: 'ModalWindow',
+
     props: {
       show: {
         type: Boolean,
@@ -28,19 +29,10 @@
         default: false
       }
     },
-    watch: {
-      show: function (newVal) {
-        this.showLocal = newVal
-      }
-    },
-    data () {
-      return {
-        showLocal: this.show
-      }
-    },
+
     methods: {
       close () {
-        this.$emit('close')
+        this.$emit('update:show', false)
       },
       onClickOverlay ($event) {
         if (this.closeOnOverlay && $event && $event.target === this.$refs.overlay) {

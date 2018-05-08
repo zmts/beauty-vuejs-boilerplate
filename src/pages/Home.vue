@@ -2,24 +2,21 @@
   <div class="home page">
     <h1>{{ msg }}</h1>
     <button @click="isShownModal = true">show modal</button>
-    <button class="show-toast" @click="showToast">show toast</button>
-    <ModalWindow
-      closeOnOverlay
-      @close="onCloseModal"
-      :show="isShownModal">
+    <button @click="showToast">show toast</button>
+    <UiModal closeOnOverlay :show.sync="isShownModal">
       <div>
         hi here
       </div>
-    </ModalWindow>
+    </UiModal>
   </div>
 </template>
 
 <script>
-  import ModalWindow from '@/components/ModalWindow.vue'
+  import UiModal from '@/components/UiModal.vue'
   export default {
     name: 'IndexPage',
     components: {
-      ModalWindow
+      UiModal
     },
     data () {
       return {
@@ -29,19 +26,9 @@
     },
 
     methods: {
-      onCloseModal () {
-        this.isShownModal = false
-      },
       showToast () {
-        this.$store.commit('dom/TOAST', {type: 'success', message: 'lol'})
+        this.$store.commit('dom/TOAST', {type: 'success', message: 'hello'})
       }
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  .show-toast{
-    position: absolute;
-    right: 10px;
-  }
-</style>

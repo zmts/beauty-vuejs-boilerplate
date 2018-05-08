@@ -47,6 +47,7 @@
 
 <style lang="scss">
   .ui-toast.component {
+    cursor: pointer;
     padding: 20px;
     background-color: $color-white;
     margin: 20px 0;
