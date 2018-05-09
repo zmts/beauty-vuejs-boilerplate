@@ -1,47 +1,19 @@
-// third party
 import Vue from 'vue'
-import VueMaterial from 'vue-material'
 
-// main
 import AppLayout from './layout/index.vue'
 import router from './router'
 import store from './store'
 import setGlobalHelpers from './global.helpers'
-import globalEventBus from './plugins/globalEventBus'
 
-// mixins
-import currentUser from './mixins/currentUser'
-import jumpTo from './mixins/jumpTo'
+import './mixins'
+import './plugins'
+import './thirdParty'
 
-// styles
-import 'vue-material/dist/vue-material.css'
-import './assets/fonts/bebasneue.css'
 import './scss/style.scss'
-
-/**
- * ------------------------------
- * Initialization
- * ------------------------------
- */
+import './assets/fonts/bebasneue.css'
 
 setGlobalHelpers()
 Vue.config.productionTip = false
-
-// third party components
-Vue.use(VueMaterial)
-
-// plugins
-Vue.use(globalEventBus)
-
-// global mixins
-Vue.mixin(currentUser)
-Vue.mixin(jumpTo)
-
-/**
- * ------------------------------
- * App intance
- * ------------------------------
- */
 
 /* eslint-disable no-new */
 new Vue({

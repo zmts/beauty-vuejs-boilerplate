@@ -1,19 +1,19 @@
 <template>
   <transition name="modal">
-    <div class="modal-window overlay component" v-if="show" @click="onClickOverlay" ref="overlay">
-        <div class="modal-content">
-          <div class="header">
-            <span class="close" @click="close" v-if="showCloseButton">close</span>
-          </div>
-          <slot></slot>
+    <div class="ui-modal overlay component" v-if="show" @click="onClickOverlay" ref="overlay">
+      <div class="modal-content">
+        <div class="header">
+          <span class="close" @click="close" v-if="showCloseButton">close</span>
         </div>
+        <slot></slot>
+      </div>
     </div>
   </transition>
 </template>
 
 <script>
   export default {
-    name: 'ModalWindow',
+    name: 'UiModal',
 
     props: {
       show: {
@@ -44,7 +44,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .modal-window.overlay.component {
+  .ui-modal.overlay.component {
     width: 100vw;
     height: 100vh;
     z-index: 100;

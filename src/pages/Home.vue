@@ -4,8 +4,11 @@
     <button @click="isShownModal = true">show modal</button>
     <button @click="showToast">show toast</button>
     <UiModal closeOnOverlay :show.sync="isShownModal">
-      <div>
+      <div class="some-modal-content">
         hi here
+        <div class="buttons">
+          <button @click="submitModalHandler">ok</button>
+        </div>
       </div>
     </UiModal>
   </div>
@@ -28,7 +31,23 @@
     methods: {
       showToast () {
         this.$store.commit('dom/TOAST', {type: 'success', message: 'hello'})
+      },
+      submitModalHandler () {
+        // some logic
+        this.isShownModal = false
       }
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .some-modal-content {
+    min-width: 400px;
+    padding: 25px;
+
+    .buttons button {
+      padding: 10px;
+      margin: 10px;
+    }
+  }
+</style>
