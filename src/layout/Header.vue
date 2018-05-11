@@ -5,20 +5,30 @@
     <div class="menu-wrapper">
       <ul class="menu">
         <li>
-          <router-link :to="{ path: '/' }" exact>Home</router-link>
+          <router-link :to="{ name: 'index' }" exact>Home</router-link>
         </li>
         <li>
-          <router-link :to="{ path: '/news' }">News</router-link>
+          <router-link :to="{ name: 'news' }">News</router-link>
         </li>
       </ul>
       <ul class="menu side">
         <li v-if="!$currentUser.id">
-          <router-link :to="{ path: '/login' }">login</router-link>
+          <router-link :to="{ name: 'login' }">login</router-link>
         </li>
         <li v-if="$currentUser.id">
-          <router-link :to="{ path: '/profile' }">profile</router-link>
+          <router-link :to="{ name: 'profile' }">profile</router-link>
         </li>
         <li v-if="$currentUser.id"><span class="logout-button" @click="logout()">logout</span></li>
+        <li>
+          <UiMenu>
+            <ul>
+              <li><router-link :to="{ name: 'index' }" exact>home</router-link></li>
+              <li><router-link :to="{ name: 'news' }">news</router-link></li>
+              <li><router-link :to="{ name: 'login' }">login</router-link></li>
+              <li>hello</li>
+            </ul>
+          </UiMenu>
+        </li>
       </ul>
     </div>
 
@@ -27,15 +37,16 @@
 </template>
 
 <script>
-  //    import AppLogin from '@/components/login.component'
-  import UiToastList from '@/components/UiToastList'
   import * as authService from '../services/auth.service'
+
+  import UiMenu from '@/components/UiMenu.vue'
+  import UiToastList from '@/components/UiToastList'
 
   export default {
     name: 'Header',
     components: {
-      UiToastList
-//            AppLogin
+      UiToastList,
+      UiMenu
     },
     methods: {
       logout () {
@@ -72,6 +83,7 @@
       text-transform: uppercase;
       display: flex;
       justify-content: center;
+      align-items: center;
 
       li {
         padding: 15px;

@@ -9,9 +9,9 @@
           this.do()
         }
       }
-      document.addEventListener('click', listener)
+      document.addEventListener('click', listener, true)
       this.$once('hook:destroyed', () => {
-        document.removeEventListener('click', listener)
+        document.removeEventListener('click', listener, true)
       })
     },
     render () {
