@@ -1,20 +1,19 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 18 18">
-    <g :fill="color">
-      <component :is="bodyName"></component>
-    </g>
-  </svg>
+  <component :is="bodyName" :size="size" :color="color"></component>
 </template>
 
 <script>
   import write from './write'
   import moon from './moon'
+  import done from './done'
+  import arrowDown from './arrowDown'
 
   export default {
     name: 'UiIconBase',
     props: {
       bodyName: {
-        type: String
+        type: String,
+        default: 'moon'
       },
       size: {
         type: [Number, String],
@@ -28,7 +27,9 @@
 
     components: {
       write,
-      moon
+      moon,
+      done,
+      arrowDown
     },
 
     mounted () {
