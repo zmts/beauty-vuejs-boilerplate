@@ -39,17 +39,16 @@ Images/Fonts/Other media stuff.
 ### `components`
 Shared components folder.
 - `DataBox` wrap in this component any received data. It represents loading(spinloader animation), error and empty statuses (examaple in `src/pages/News.vue`).
-- `ImgLoader` - `img` tag wrapper. Shows image loading(pulseloader animation) status and animate onloading as option.
-- `ModalWindow` - simple modal window.
+- `UiImgLoader` - `img` tag wrapper. Shows image loading(pulseloader animation) status and animate onloading as option.
+- `UiModal` - simple modal window.
 - `PulseLoading` and `SpinnerWave` - loading animation.
-- `UploadMulti` and `UploadSingle` - file upload example components.
+- `UiUploadMulti` and `UiUploadSingle` - file upload example components.
 - ...
 
 ### `config`
 App config files. Each category in separate file.
 
 ### `directives`
-Directives.
 - Handy debounce directive
 
 ### `layout`
@@ -114,7 +113,7 @@ In `/build/utils.js` >> `generateLoaders('sass')`
 
 ## Utils/Helpers
 
-###  What about debounce ?
+### What about debounce ?
 ```
 import debounce from '../directives/debounce'
 directives: {
@@ -129,7 +128,13 @@ And use it in template.
 ### Notifications/Toast:
 Just make mutation
 ```
-commit('dom/TOAST', { message: 'hello', duration: 2000 })
+commit('dom/TOAST', { message: 'hello', duration: 2000, type: 'success' })
+```
+
+### Icons/SVG ?
+Set up yours svg icons in `src/components/icons/` folder. Modify `UiIconBase.vue` related to yours newly added icons and use it in template.
+```
+<UiIconBase size="40" color="yellow" bodyName="write"/>
 ```
 
 ## Build Setup
@@ -156,3 +161,8 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - Integrate strong FLUX architecture
 - Add global loading component
 - Add more examples
+
+# Amazing repos where I found some great approaches:
+- https://github.com/sdras/vue-sample-svg-icons
+- https://github.com/MillerRen/vue-boilerplate
+- https://github.com/vuejs-tips/v-debounce
