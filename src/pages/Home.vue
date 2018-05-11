@@ -11,15 +11,21 @@
         </div>
       </div>
     </UiModal>
+
+    <UiIconBase size="40" bodyName="write"/>
+
   </div>
 </template>
 
 <script>
   import UiModal from '@/components/UiModal.vue'
+  import UiIconBase from '@/components/icons/UiIconBase.vue'
+
   export default {
     name: 'IndexPage',
     components: {
-      UiModal
+      UiModal,
+      UiIconBase
     },
     data () {
       return {
