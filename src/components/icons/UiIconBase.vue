@@ -1,6 +1,6 @@
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" :width="size" :height="size" viewBox="0 0 18 18">
-    <g fill="currentColor">
+    <g :fill="color">
       <component :is="bodyName"></component>
     </g>
   </svg>
@@ -8,6 +8,7 @@
 
 <script>
   import write from './write'
+  import moon from './moon'
 
   export default {
     name: 'UiIconBase',
@@ -18,11 +19,26 @@
       size: {
         type: [Number, String],
         default: 18
+      },
+      color: {
+        type: String,
+        default: 'currentColor'
       }
     },
 
     components: {
-      write
+      write,
+      moon
+    },
+
+    mounted () {
+      let isValidBodyName = this.$children
+        .map(item => item.$options._componentTag)
+        .find(item => item === this.bodyName)
+
+      if (!isValidBodyName) {
+        throw new Error('Wrong bodyName param')
+      }
     }
   }
 </script>
