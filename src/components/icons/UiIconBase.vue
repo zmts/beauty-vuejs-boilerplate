@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import UiIconWrite from './UiIconWrite'
+  import write from './write'
 
   export default {
     name: 'UiIconBase',
@@ -22,7 +22,7 @@
     },
 
     components: {
-      write: UiIconWrite
+      write
     }
   }
 </script>

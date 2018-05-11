@@ -12,7 +12,7 @@
       </div>
     </UiModal>
 
-    <UiIconBase size="40" bodyName="write"/>
+    <UiIconBase size="40" color="red" bodyName="write"/>
 
   </div>
 </template>
