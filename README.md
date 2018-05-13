@@ -131,10 +131,10 @@ Just make mutation
 commit('dom/TOAST', { message: 'hello', duration: 2000, type: 'success' })
 ```
 
-### Icons/SVG ?
+### Icons/SVG:
 Set up yours svg icons in `src/components/icons/` folder. Modify `UiIconBase.vue` related to yours newly added icons and use it in template.
 ```
-<UiIconBase size="40" color="yellow" bodyName="write"/>
+<UiIconBase size="40" color="yellow" icon="write"/>
 ```
 
 ## Build Setup

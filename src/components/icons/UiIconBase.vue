@@ -1,5 +1,5 @@
 <template>
-  <component :is="bodyName" :size="size" :color="color"></component>
+  <component :is="icon" :size="size" :color="color"></component>
 </template>
 
 <script>
@@ -11,7 +11,7 @@
   export default {
     name: 'UiIconBase',
     props: {
-      bodyName: {
+      icon: {
         type: String,
         default: 'moon'
       },
@@ -30,16 +30,6 @@
       moon,
       done,
       arrowDown
-    },
-
-    mounted () {
-      let isValidBodyName = this.$children
-        .map(item => item.$options._componentTag)
-        .find(item => item === this.bodyName)
-
-      if (!isValidBodyName) {
-        throw new Error('Wrong bodyName param')
-      }
     }
   }
 </script>
