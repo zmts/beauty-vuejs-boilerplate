@@ -20,9 +20,12 @@ export default {
         id: new Date().getTime(),
         message: typeof payload === 'string' ? payload : payload.message,
         type: payload.type || 'default',
-        duration: payload.type === 'error' ? 0 : payload.duration || 5000
+        duration: payload.duration || 5000
       }
-
+      if (payload.type === 'error') {
+        toast.duration = 0
+        console.error(payload.message)
+      }
       state.toastsList.push({ ...toast })
     },
     TOAST_REMOVE (state, payload) {

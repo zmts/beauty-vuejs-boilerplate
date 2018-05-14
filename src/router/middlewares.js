@@ -1,6 +1,5 @@
 import $store from '../store'
 import * as authService from '../services/auth.service'
-import UsersService from '../services/users.service'
 
 /**
  * Current user state initialization
@@ -11,8 +10,7 @@ export function initCurrentUserStateMiddleware (to, from, next) {
 
   if (authService.getRefreshToken() && !currentUserId) {
     return authService.refreshTokens()
-      .then(() => UsersService.getCurrent())
-      .then(user => $store.commit('user/SET_CURRENT_USER', user.data))
+      .then(() => $store.dispatch('user/getCurrent'))
       .then(() => next())
       .catch(error => console.log(error))
   }
