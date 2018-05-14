@@ -36,7 +36,8 @@
 
     methods: {
       showToast () {
-        this.$store.commit('dom/TOAST', {type: 'success', message: 'hello'})
+        console.log('aaa')
+        this.$store.commit('toast/NEW', {type: 'success', message: 'hello'})
       },
       submitModalHandler () {
         // some logic

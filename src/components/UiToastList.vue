@@ -27,17 +27,17 @@
 
     computed: {
       toastsList () {
-        return this.$store.state.dom.toastsList
+        return this.$store.state.toast.toastsList
       }
     },
 
     methods: {
       onRemove (id) {
-        this.$store.commit('dom/TOAST_REMOVE', { id })
+        this.$store.commit('toast/REMOVE', { id })
       },
       clearToastList () {
         if (this.toastsList.length) {
-          this.$store.commit('dom/TOAST_LIST_CLEAR')
+          this.$store.commit('toast/CLEAR_LIST')
         }
       }
     }
