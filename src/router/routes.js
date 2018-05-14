@@ -4,7 +4,7 @@ import postsPage from '../pages/profile/Posts.vue'
 
 // single pages
 import homePage from '../pages/Home.vue'
-import newsPage from '../pages/News.vue'
+import newsPage from '../pages/news/NewsPage.vue'
 import loginPage from '../pages/Login.vue'
 import notFoundPage from '../pages/NotFound.vue'
 
