@@ -86,7 +86,7 @@
       }
     }
     .content {
-      min-width: 100px;
+      min-width: 150px;
       border: 1px solid $color-black-transparent;
       border-radius: 4px;
       padding: 5px 0;
@@ -95,10 +95,14 @@
       right: 0;
       background-color: $color-white;
       ul li {
-        padding: 10px;
+        line-height: 45px;
+        padding: 0 15px;
         &:hover {
           background-color: $color-black-transparent;
           cursor: pointer;
+        }
+        a {
+          display: block;
         }
       }
     }
