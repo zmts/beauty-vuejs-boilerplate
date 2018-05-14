@@ -1,3 +1,6 @@
+/**
+ * anything that relates to DOM
+ */
 export default {
   namespaced: true,
   state: {
