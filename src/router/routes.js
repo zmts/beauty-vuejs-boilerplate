@@ -1,6 +1,6 @@
 // profile
-import profilePage from '../pages/profile/Profile.vue'
-import postsPage from '../pages/profile/Posts.vue'
+import profilePage from '../pages/profile/ProfilePage.vue'
+import profilePostsPage from '../pages/profile/ProfilePostsPage.vue'
 
 // single pages
 import homePage from '../pages/Home.vue'
@@ -33,7 +33,7 @@ export const routes = [
       {
         path: '',
         name: 'profile',
-        component: postsPage
+        component: profilePostsPage
       }
     ]
   },
