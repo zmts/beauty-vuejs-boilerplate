@@ -12,7 +12,19 @@
       </div>
     </UiModal>
 
-    <UiIconBase size="40" color="red" icon="done"/>
+    <UiIconBase size="40" color="blue" icon="done"/>
+
+    <UiInputText
+      v-model="msg"
+      placeholder="Enter message"
+      label="Enter message"
+      someHelloProp="hello"
+      @blur="onBlur"
+      @keyup.enter="onEnter"
+      @keyup.esc="onEsc"
+      :error="inputError">
+      <div slot="bottom">This is very important message</div>
+    </UiInputText>
 
   </div>
 </template>
@@ -20,17 +32,22 @@
 <script>
   import UiModal from '@/components/UiModal.vue'
   import UiIconBase from '@/components/icons/UiIconBase.vue'
+  import UiInputText from '@/components/UiInputText.vue'
 
   export default {
     name: 'IndexPage',
+
     components: {
       UiModal,
-      UiIconBase
+      UiIconBase,
+      UiInputText
     },
+
     data () {
       return {
         msg: 'Welcome to Index!!!',
-        isShownModal: false
+        isShownModal: false,
+        inputError: false
       }
     },
 
@@ -42,6 +59,15 @@
       submitModalHandler () {
         // some logic
         this.isShownModal = false
+      },
+      onBlur () {
+        console.log('onBlur!!!')
+      },
+      onEnter () {
+        console.log('onEnter!!!')
+      },
+      onEsc () {
+        console.log('onEsc!!!')
       }
     }
   }

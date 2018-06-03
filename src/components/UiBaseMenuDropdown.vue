@@ -1,6 +1,6 @@
 <template>
   <UiOnClickOutside :do="hideContent">
-    <div class="ui-menu component">
+    <div class="ui-base-menu-dropdown component">
       <div class="icon-wrapper" @click="toggleMenu">
         <slot name="icon">
           <div class="default-menu-icon">
@@ -22,7 +22,7 @@
   import UiOnClickOutside from './UiOnClickOutside'
 
   export default {
-    name: 'UiMenu',
+    name: 'UiBaseMenuDropdown',
     props: {
       autoClose: {
         type: Boolean,
@@ -71,7 +71,7 @@
 </script>
 
 <style lang="scss">
-  .ui-menu.component {
+  .ui-base-menu-dropdown.component {
     display: flex;
     position: relative;
     .icon {
