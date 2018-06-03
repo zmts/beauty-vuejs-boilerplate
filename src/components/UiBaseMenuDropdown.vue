@@ -102,6 +102,7 @@
           cursor: pointer;
         }
         a {
+          color: inherit;
           display: block;
         }
       }

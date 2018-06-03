@@ -20,14 +20,7 @@
         </li>
         <li v-if="$currentUser.id"><span class="logout-button" @click="logout()">logout</span></li>
         <li>
-          <UiBaseMenuDropdown>
-            <ul>
-              <li><router-link :to="{ name: 'index' }" exact>home</router-link></li>
-              <li><router-link :to="{ name: 'news' }">news</router-link></li>
-              <li><router-link :to="{ name: 'login' }">login</router-link></li>
-              <li>hello</li>
-            </ul>
-          </UiBaseMenuDropdown>
+          <UiHeaderMenu/>
         </li>
       </ul>
     </div>
@@ -39,14 +32,14 @@
 <script>
   import * as authService from '../services/auth.service'
 
-  import UiBaseMenuDropdown from '@/components/UiBaseMenuDropdown.vue'
+  import UiHeaderMenu from '@/components/UiHeaderMenu.vue'
   import UiToastList from '@/components/UiToastList'
 
   export default {
     name: 'Header',
     components: {
       UiToastList,
-      UiBaseMenuDropdown
+      UiHeaderMenu
     },
     methods: {
       logout () {
