@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-header-menu component">
+  <div class="ui-header-dropdown-menu component">
     <UiBaseMenuDropdown>
       <ul>
         <li><router-link :to="{ name: 'index' }" exact>home</router-link></li>
@@ -15,7 +15,7 @@
   import UiBaseMenuDropdown from './UiBaseMenuDropdown'
 
   export default {
-    name: 'UiHeaderMenu',
+    name: 'UiHeaderDropdownMenu',
     components: { UiBaseMenuDropdown }
   }
 </script>
