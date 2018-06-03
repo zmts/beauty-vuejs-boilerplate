@@ -9,6 +9,7 @@
         :class="{ 'is-label-error': error }"
         :for="labelId">{{ label }}
       </label>
+
       <input
         :id="labelId"
         :type="inputType"
@@ -16,8 +17,8 @@
         :class="{ 'is-input-error': error }"
         :value="value"
         :placeholder="placeholder"
-        v-on="listeners"
-        @input="onInput">
+        v-on="listeners">
+
       <div class="slot-bottom" v-if="this.$slots.bottom">
         <slot name="bottom"/>
       </div>
@@ -50,9 +51,6 @@
         let min = 1
         let max = 1000000000
         return Math.floor(Math.random() * (max - min + 1) + min)
-      },
-      onInput ($event) {
-        this.$emit('input', $event.target.value)
       }
     },
 
@@ -67,11 +65,10 @@
         return this.password ? 'password' : 'text'
       },
       listeners () {
-        delete this.$listeners.input
-        return { ...this.$listeners }
-      },
-      attrs () { // help computed prop(just for view passed attributes)
-        return this.$attrs
+        return {
+          ...this.$listeners,
+          input: event => this.$emit('input', event.target.value)
+        }
       }
     }
   }
