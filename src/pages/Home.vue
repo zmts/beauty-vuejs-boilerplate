@@ -23,7 +23,13 @@
       @keyup.enter="onEnter"
       @keyup.esc="onEsc"
       :error="inputError">
-      <div slot="bottom">This is very important message</div>
+      <div slot="before">
+        <UiIconBase icon="done"/>
+      </div>
+      <div slot="after">
+        <UiIconBase icon="write"/>
+      </div>
+      <div slot="bottom">This is very important description</div>
     </UiInputText>
 
   </div>

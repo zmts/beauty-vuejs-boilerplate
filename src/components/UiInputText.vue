@@ -1,6 +1,6 @@
 <template>
   <div class="ui-input-text component">
-    <div class="slot-before" v-if="this.$slots.before">
+    <div class="slot-before" v-if="$slots.before" :style="inputHeight">
       <slot name="before"></slot>
     </div>
 
@@ -13,18 +13,18 @@
       <input
         :id="labelId"
         :type="inputType"
-        :style="inputStyle"
-        :class="{ 'is-input-error': error }"
+        :style="inputHeight"
+        :class="inputClasses"
         :value="value"
         :placeholder="placeholder"
         v-on="listeners">
 
-      <div class="slot-bottom" v-if="this.$slots.bottom">
+      <div class="slot-bottom" v-if="$slots.bottom">
         <slot name="bottom"/>
       </div>
     </div>
 
-    <div class="slot-after" v-if="this.$slots.after">
+    <div class="slot-after" v-if="$slots.after" :style="inputHeight">
       <slot name="after"></slot>
     </div>
   </div>
@@ -55,8 +55,15 @@
     },
 
     computed: {
-      inputStyle () {
+      inputHeight () {
         return `height: ${this.height};`
+      },
+      inputClasses () {
+        return {
+          'is-input-error': this.error,
+          'border-radius-start': !this.$slots.before,
+          'border-radius-end': !this.$slots.after
+        }
       },
       labelId () {
         return `inputId${this.getRandomInt()}`
@@ -76,6 +83,8 @@
 
 <style lang="scss" scoped>
   $color-gray: #b3b3b3;
+  $radius: 5px;
+  $padding: 5px;
 
   .ui-input-text.component {
     display: flex;
@@ -84,27 +93,53 @@
       width: 100%;
     }
     .slot-bottom {
-      padding-top: 5px;
+      padding-top: $padding;
       font-size: 13px;
       color: $color-gray;
     }
+    .slot-after, .slot-before {
+      color: $color-gray;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+    }
+    .slot-before {
+      border: 1px solid $color-gray;
+      border-right: 0;
+      border-top-left-radius: $radius;
+      border-bottom-left-radius: $radius;
+    }
+    .slot-after {
+      border: 1px solid $color-gray;
+      border-left: 0;
+      border-top-right-radius: $radius;
+      border-bottom-right-radius: $radius;
+    }
+
     label {
       cursor: pointer;
       display: block;
       color: $color-gray;
       font-size: 13px;
-      padding-bottom: 5px;
+      padding-bottom: $padding;
     }
     input {
       width: 100%;
       background-color: transparent;
-      border-radius: 6px;
       border: 1px solid $color-gray;
       font-size: 17px;
       padding: 15px 12px;
       outline: none;
       &:focus {
         border: 1px solid #1e2221;
+      }
+      &.border-radius-start {
+        border-top-left-radius: $radius;
+        border-bottom-left-radius: $radius;
+      }
+      &.border-radius-end {
+        border-top-right-radius: $radius;
+        border-bottom-right-radius: $radius;
       }
     }
     .is-input-error {
