@@ -17,7 +17,7 @@
     name: 'UiCheckbox',
 
     props: {
-      checked: { type: Boolean, default: false },
+      checked: { type: Boolean, required: true }, // v-model
       value: { type: [String, Number, Boolean] }
     },
 
