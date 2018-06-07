@@ -12,7 +12,7 @@
       </div>
     </UiModal>
 
-    <UiIconBase size="40" color="blue" icon="done"/>
+    <UiBaseIcon width="40px" height="40px" color="blue" iconName="done"/>
 
     <UiInputText
       v-model="msg"
@@ -24,36 +24,41 @@
       @keyup.esc="onEsc"
       :error="inputError">
       <div slot="before">
-        <UiIconBase icon="done"/>
+        <UiBaseIcon iconName="done"/>
       </div>
       <div slot="after">
-        <UiIconBase icon="write"/>
+        <UiBaseIcon iconName="write"/>
       </div>
       <div slot="bottom">This is very important description</div>
     </UiInputText>
+
+    <UiCheckbox value="hello checkbox" v-model="checkboxState"/>
 
   </div>
 </template>
 
 <script>
   import UiModal from '@/components/UiModal.vue'
-  import UiIconBase from '@/components/icons/UiIconBase.vue'
+  import UiBaseIcon from '@/components/icons/UiBaseIcon.vue'
   import UiInputText from '@/components/UiInputText.vue'
+  import UiCheckbox from '@/components/UiCheckbox.vue'
 
   export default {
     name: 'IndexPage',
 
     components: {
       UiModal,
-      UiIconBase,
-      UiInputText
+      UiBaseIcon,
+      UiInputText,
+      UiCheckbox
     },
 
     data () {
       return {
         msg: 'Welcome to Index!!!',
         isShownModal: false,
-        inputError: false
+        inputError: false,
+        checkboxState: false
       }
     },
 

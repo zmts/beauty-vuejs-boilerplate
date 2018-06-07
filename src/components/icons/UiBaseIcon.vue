@@ -1,5 +1,10 @@
 <template>
-  <component :is="icon" :size="size" :color="color"></component>
+  <component
+    :is="iconName"
+    :width="width"
+    :height="height"
+    :color="color">
+  </component>
 </template>
 
 <script>
@@ -11,13 +16,17 @@
   export default {
     name: 'UiIconBase',
     props: {
-      icon: {
+      iconName: {
         type: String,
         default: 'moon'
       },
-      size: {
-        type: [Number, String],
-        default: 18
+      width: {
+        type: String,
+        default: '18px'
+      },
+      height: {
+        type: String,
+        default: '18px'
       },
       color: {
         type: String,
