@@ -12,7 +12,7 @@
       </div>
     </UiModal>
 
-    <UiBaseIcon width="40px" height="40px" color="blue" iconName="done"/>
+    <UiBaseIcon width="40px" height="40px" color="blue" iconName="done" @click="onClickIcon"/>
 
     <UiInputText
       v-model="msg"
@@ -34,6 +34,9 @@
 
     <UiCheckbox value="hello checkbox" v-model="checkboxState"/>
 
+    <br><br>
+    <UiPaginationOffset :offset.sync="pagination.offset" :limit="pagination.limit" :total="pagination.total"/>
+
   </div>
 </template>
 
@@ -42,6 +45,7 @@
   import UiBaseIcon from '@/components/icons/UiBaseIcon.vue'
   import UiInputText from '@/components/UiInputText.vue'
   import UiCheckbox from '@/components/UiCheckbox.vue'
+  import UiPaginationOffset from '../components/UiPaginationOffset'
 
   export default {
     name: 'IndexPage',
@@ -50,7 +54,8 @@
       UiModal,
       UiBaseIcon,
       UiInputText,
-      UiCheckbox
+      UiCheckbox,
+      UiPaginationOffset
     },
 
     data () {
@@ -58,7 +63,13 @@
         msg: 'Welcome to Index!!!',
         isShownModal: false,
         inputError: false,
-        checkboxState: false
+        checkboxState: false,
+
+        pagination: {
+          limit: 20,
+          offset: 0,
+          total: 60
+        }
       }
     },
 
@@ -79,6 +90,9 @@
       },
       onEsc () {
         console.log('onEsc!!!')
+      },
+      onClickIcon () {
+        console.log('onClickIcon!!!!')
       }
     }
   }

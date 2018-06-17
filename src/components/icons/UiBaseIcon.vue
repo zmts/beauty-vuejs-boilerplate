@@ -1,10 +1,12 @@
 <template>
-  <component
-    :is="iconName"
-    :width="width"
-    :height="height"
-    :color="color">
-  </component>
+  <span class="ui-icon-base component" v-on="$listeners">
+    <component
+      :is="iconName"
+      :width="width"
+      :height="height"
+      :color="color">
+    </component>
+  </span>
 </template>
 
 <script>
@@ -43,4 +45,8 @@
   }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .ui-icon-base.component {
+    display: inline-block;
+  }
+</style>

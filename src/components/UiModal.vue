@@ -48,7 +48,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 100;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.2);
