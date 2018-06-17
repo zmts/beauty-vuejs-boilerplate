@@ -14,6 +14,9 @@
   import moon from './moon'
   import done from './done'
   import arrowDown from './arrowDown'
+  import sort from './sort'
+  import sortDown from './sortDown'
+  import sortUp from './sortUp'
 
   export default {
     name: 'UiIconBase',
@@ -40,7 +43,10 @@
       write,
       moon,
       done,
-      arrowDown
+      arrowDown,
+      sort,
+      sortDown,
+      sortUp
     }
   }
 </script>
