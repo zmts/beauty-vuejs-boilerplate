@@ -11,14 +11,14 @@
           <router-link :to="{ name: 'news' }">News</router-link>
         </li>
       </ul>
-      <ul class="menu side">
-        <li v-if="!$currentUser.id">
+      <ul class="menu side" v-if="!$currentUser.id">
+        <li>
           <router-link :to="{ name: 'login' }">login</router-link>
         </li>
-        <li v-if="$currentUser.id">
+        <li>
           <router-link :to="{ name: 'profile' }">profile</router-link>
         </li>
-        <li v-if="$currentUser.id"><span class="logout-button" @click="logout()">logout</span></li>
+        <li><span class="logout-button" @click="logout()">logout</span></li>
         <li>
           <UiHeaderDropdownMenu/>
         </li>
