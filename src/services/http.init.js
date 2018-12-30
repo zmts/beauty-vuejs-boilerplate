@@ -29,7 +29,7 @@ export default class Http {
             .then(response => {
               request.headers['token'] = response.data.accessToken
               return request
-            }).catch(error => console.log(error))
+            }).catch(error => Promise.reject(error))
         } else {
           return request
         }
