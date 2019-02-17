@@ -24,7 +24,7 @@ This project based on real world practice and ready to use. Have a fun!
   - [`services`](#services)
   - [`store`](#store)
   - [`.env.js`](#envjs)
-  - [`main.js`](#appinitjs)
+  - [`main.js`](#mainjs)
   - [`global.helpers.js`](#globalhelpersjs)
 
 ### `src`
