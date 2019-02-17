@@ -24,7 +24,7 @@ This project based on real world practice and ready to use. Have a fun!
   - [`services`](#services)
   - [`store`](#store)
   - [`.env.js`](#envjs)
-  - [`app.init.js`](#appinitjs)
+  - [`main.js`](#appinitjs)
   - [`global.helpers.js`](#globalhelpersjs)
 
 ### `src`
@@ -99,7 +99,7 @@ App store with separate modules.
 ### `.env.js`
 Environment variables (add this to git ignore).
 
-### `app.init.js`
+### `main.js`
 Root app initialization file.
 
 ### `global.helpers.js`
