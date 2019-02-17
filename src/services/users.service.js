@@ -7,7 +7,7 @@ class UsersService extends BaseService {
 
   getCurrent () {
     return new Promise((resolve, reject) => {
-      return this.request({auth: true}).get(`${this.entity}/current`)
+      return this.request({ auth: true }).get(`${this.entity}/current`)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))
         .catch(error => {
           let message = error.response.data ? error.response.data.error : error.response.statusText
@@ -18,7 +18,7 @@ class UsersService extends BaseService {
 
   getPostsByUserId (user_id = window.required()) {
     return new Promise((resolve, reject) => {
-      return this.request({auth: true}).get(`${this.entity}/${user_id}/posts`)
+      return this.request({ auth: true }).get(`${this.entity}/${user_id}/posts`)
         .then(response => {
           let data = {
             content: response.data.data,

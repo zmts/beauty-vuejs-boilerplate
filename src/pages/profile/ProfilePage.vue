@@ -8,12 +8,12 @@
 </template>
 
 <script>
-  export default {
-    name: 'ProfilePage',
-    data () {
-      return {
-        msg: 'Welcome to profile!!!'
-      }
+export default {
+  name: 'ProfilePage',
+  data () {
+    return {
+      msg: 'Welcome to profile!!!'
     }
   }
+}
 </script>

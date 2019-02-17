@@ -23,101 +23,101 @@
 </template>
 
 <script>
-  /**
-   * @description Component compatibility developed with pagination that starts from 0 page
-   */
-  export default {
-    name: 'Pagination',
-    props: {
-      page: {
-        /**
-         * current page number
-         */
-        type: Number,
-        default: 0,
-        required: true
-      },
-      total: {
-        type: Number,
-        default: 0,
-        required: true
-      },
-      limit: {
-        type: Number,
-        default: 0,
-        required: true
-      },
+/**
+ * @description Component compatibility developed with pagination that starts from 0 page
+ */
+export default {
+  name: 'Pagination',
+  props: {
+    page: {
       /**
-       * max count of pages button
+       * current page number
        */
-      maxPages: {
-        type: Number,
-        default: 5
-      }
+      type: Number,
+      default: 0,
+      required: true
     },
-
-    data () {
-      return {
-        current: this.page
-      }
+    total: {
+      type: Number,
+      default: 0,
+      required: true
     },
-
-    methods: {
-      goToPage (pageNumber) {
-        if ((pageNumber < 0) || (pageNumber > this.pagesCount)) return
-        this.current = pageNumber
-        this.$emit('update:page', this.current)
-      }
+    limit: {
+      type: Number,
+      default: 0,
+      required: true
     },
+    /**
+     * max count of pages button
+     */
+    maxPages: {
+      type: Number,
+      default: 5
+    }
+  },
 
-    computed: {
-      pagesCount () { // divide total to limit
-        // if haven't remainder
-        if ((this.total % this.limit) === 0) return this.total / this.limit
-        // if have remainder
-        return parseInt(this.total / this.limit) + 1
-      },
-      pagesArray () {
-        return Array.from(new Array(this.pagesCount)).map((item, key) => (item = key))
-      },
-      visiblePagesArray () {
-        return this.pagesArray.slice(this.visiblePagesArrayFirstIndex, this.visiblePagesArrayLastIndex)
-      },
-      visiblePagesArrayFirstIndex () {
-        const pagesArrayLengthMinusMaxPages = this.pagesArray.length - this.maxPages
-        if ((this.current >= pagesArrayLengthMinusMaxPages) && (pagesArrayLengthMinusMaxPages > 0)) {
-          return pagesArrayLengthMinusMaxPages
-        }
-        return this.current
-      },
-      visiblePagesArrayLastIndex () {
-        const pagesArrayLengthMinusMaxPages = this.pagesArray.length - this.maxPages
-        if (this.current >= pagesArrayLengthMinusMaxPages) {
-          return this.pagesArray.length
-        }
-        return this.current + this.maxPages
-      },
-      isDisabledNextBtn () {
-        return this.current === this.pagesCount - 1
-      },
-      isDisabledPrevBtn () {
-        return !this.current
+  data () {
+    return {
+      current: this.page
+    }
+  },
+
+  methods: {
+    goToPage (pageNumber) {
+      if ((pageNumber < 0) || (pageNumber > this.pagesCount)) return
+      this.current = pageNumber
+      this.$emit('update:page', this.current)
+    }
+  },
+
+  computed: {
+    pagesCount () { // divide total to limit
+      // if haven't remainder
+      if ((this.total % this.limit) === 0) return this.total / this.limit
+      // if have remainder
+      return parseInt(this.total / this.limit) + 1
+    },
+    pagesArray () {
+      return Array.from(new Array(this.pagesCount)).map((item, key) => (item = key))
+    },
+    visiblePagesArray () {
+      return this.pagesArray.slice(this.visiblePagesArrayFirstIndex, this.visiblePagesArrayLastIndex)
+    },
+    visiblePagesArrayFirstIndex () {
+      const pagesArrayLengthMinusMaxPages = this.pagesArray.length - this.maxPages
+      if ((this.current >= pagesArrayLengthMinusMaxPages) && (pagesArrayLengthMinusMaxPages > 0)) {
+        return pagesArrayLengthMinusMaxPages
       }
+      return this.current
+    },
+    visiblePagesArrayLastIndex () {
+      const pagesArrayLengthMinusMaxPages = this.pagesArray.length - this.maxPages
+      if (this.current >= pagesArrayLengthMinusMaxPages) {
+        return this.pagesArray.length
+      }
+      return this.current + this.maxPages
+    },
+    isDisabledNextBtn () {
+      return this.current === this.pagesCount - 1
+    },
+    isDisabledPrevBtn () {
+      return !this.current
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
-  .pagination.component{
-    display: flex;
-    align-items: center;
-    li {
-      button {
-        cursor: pointer;
-        &:disabled {
-          cursor: not-allowed;
-        }
+.pagination.component{
+  display: flex;
+  align-items: center;
+  li {
+    button {
+      cursor: pointer;
+      &:disabled {
+        cursor: not-allowed;
       }
     }
   }
+}
 </style>

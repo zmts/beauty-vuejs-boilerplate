@@ -1,22 +1,21 @@
-# uncomment for production
-# .env.js
+.DS_Store
+node_modules
+/dist
 
-node_modules/
-dist/
-public/
-tmp/
-.tmp/
-tmp_files/
+# local env files
+.env.local
+.env.*.local
 
+# Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Editor files
-.DS_Store
+# Editor directories and files
 .idea
 .vscode
-
-*.ai
-*.psd
-*.pdf
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*

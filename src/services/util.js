@@ -9,27 +9,27 @@ import isArray from 'lodash/isArray'
 function _getStatusMessage (status) {
   let message = ''
   switch (status) {
-  case 200:
-    message = 'All done. Request successfully executed'
-    break
-  case 201:
-    message = 'Data successfully created'
-    break
-  case 400:
-    message = 'Bad Request'
-    break
-  case 401:
-    message = 'Need auth'
-    break
-  case 404:
-    message = 'Not found'
-    break
-  case 503:
-    message = 'Service Unavailable'
-    break
-  default:
-    message = 'Something wrong. Client default error message'
-    break
+    case 200:
+      message = 'All done. Request successfully executed'
+      break
+    case 201:
+      message = 'Data successfully created'
+      break
+    case 400:
+      message = 'Bad Request'
+      break
+    case 401:
+      message = 'Need auth'
+      break
+    case 404:
+      message = 'Not found'
+      break
+    case 503:
+      message = 'Service Unavailable'
+      break
+    default:
+      message = 'Something wrong. Client default error message'
+      break
   }
   return message
 }

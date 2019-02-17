@@ -7,9 +7,9 @@ This project based on real world practice and ready to use. Have a fun!
 - Response wrapper/Response error wrapper
 - Base common and layout components
 - Some help mixins
+- Vue CLI v3
 
 ## Project structure
-- [`index.html`](#indexhtml)
 - [`src`](#src)
   - [`assets`](#assets)
   - [`components`](#components)
@@ -26,9 +26,6 @@ This project based on real world practice and ready to use. Have a fun!
   - [`.env.js`](#envjs)
   - [`app.init.js`](#appinitjs)
   - [`global.helpers.js`](#globalhelpersjs)
-
-### `index.html`
-Main index HTML file.
 
 ### `src`
 Source =)
@@ -146,13 +143,10 @@ git clone https://github.com/zmts/vuejs-boilerplate.git
 npm install
 
 # serve with hot reload at localhost:8080
-npm run dev
+npm run serve
 
 # build for production with minification
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

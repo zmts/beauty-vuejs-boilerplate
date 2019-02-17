@@ -34,71 +34,71 @@
 </template>
 
 <script>
-  import * as authService from '../services/auth.service'
+import * as authService from '../services/auth.service'
 
-  export default {
-    name: 'Login',
-    data () {
-      return {
-        email: 'user@user.com',
-        password: '123456',
-        error: ''
-      }
-    },
+export default {
+  name: 'Login',
+  data () {
+    return {
+      email: 'user@user.com',
+      password: '123456',
+      error: ''
+    }
+  },
 
-    methods: {
-      makeLogin () {
-        authService.makeLogin({
-          email: this.email,
-          password: this.password
-        }).then(response => { this.error = '' })
-          .then(() => {
-            this.$store.dispatch('user/getCurrent')
-              .then(() => this.$router.push('profile'))
-              .catch(error => console.log(error))
-          })
-          .catch((error) => {
-            console.log('error', error)
-            this.error = error.status === 404 ? 'User with same email not found' : error.message
-          })
-      }
+  methods: {
+    makeLogin () {
+      authService.makeLogin({
+        email: this.email,
+        password: this.password
+      }).then(response => { this.error = '' })
+        .then(() => {
+          this.$store.dispatch('user/getCurrent')
+            .then(() => this.$router.push('profile'))
+            .catch(error => console.log(error))
+        })
+        .catch((error) => {
+          console.log('error', error)
+          this.error = error.status === 404 ? 'User with same email not found' : error.message
+        })
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
-  .login {
-    width: 100%;
-    height: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.login {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-    .main {
-      padding: 30px 15px;
-      background: #fff;
-      width: 400px;
-      border-radius: 2px;
-      box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2),
-      0 24px 38px 3px rgba(0, 0, 0, .14),
-      0 9px 46px 8px rgba(0, 0, 0, .12);
+  .main {
+    padding: 30px 15px;
+    background: #fff;
+    width: 400px;
+    border-radius: 2px;
+    box-shadow: 0 11px 15px -7px rgba(0, 0, 0, .2),
+    0 24px 38px 3px rgba(0, 0, 0, .14),
+    0 9px 46px 8px rgba(0, 0, 0, .12);
 
-      .header {
-        text-align: center;
-      }
+    .header {
+      text-align: center;
+    }
 
-      .buttons {
-        display: flex;
-        justify-content: flex-end;
-      }
+    .buttons {
+      display: flex;
+      justify-content: flex-end;
+    }
 
-      .error {
-        background-color: red;
-        padding: 10px;
-        font-size: 12px;
-        opacity: 1;
-        transition: all 0.5s;
-      }
+    .error {
+      background-color: red;
+      padding: 10px;
+      font-size: 12px;
+      opacity: 1;
+      transition: all 0.5s;
     }
   }
+}
 </style>

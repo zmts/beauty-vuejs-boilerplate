@@ -7,42 +7,42 @@
 </template>
 
 <script>
-  export default {
-    name: 'TagsView',
-    props: {
-      tagsList: {
-        type: Array,
-        default: () => []
-      },
-      labelName: {
-        type: String,
-        default: 'label'
-      }
+export default {
+  name: 'TagsView',
+  props: {
+    tagsList: {
+      type: Array,
+      default: () => []
     },
-    computed: {
-      tags () {
-        return this.tagsList.map(item => ({label: item[this.labelName], ...item}))
-      }
+    labelName: {
+      type: String,
+      default: 'label'
+    }
+  },
+  computed: {
+    tags () {
+      return this.tagsList.map(item => ({label: item[this.labelName], ...item}))
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
-  .tags-view.component {
-    display: flex;
-    flex-wrap: wrap;
-    a {
-      color: inherit;
-      &:hover {
-        opacity: 0.7;
-      }
-    }
-    .tag{
-      margin-bottom: 5px;
-      margin-right: 5px;
-      &:last-child .comma {
-        display: none;
-      }
+.tags-view.component {
+  display: flex;
+  flex-wrap: wrap;
+  a {
+    color: inherit;
+    &:hover {
+      opacity: 0.7;
     }
   }
+  .tag{
+    margin-bottom: 5px;
+    margin-right: 5px;
+    &:last-child .comma {
+      display: none;
+    }
+  }
+}
 </style>

@@ -22,7 +22,7 @@ export default {
       state.toastsList.push({ ...toast })
     },
     REMOVE (state, payload) {
-      state.toastsList = state.toastsList.filter(({id}) => id !== payload.id)
+      state.toastsList = state.toastsList.filter(({ id }) => id !== payload.id)
     },
     CLEAR_LIST (state) {
       state.toastsList = []

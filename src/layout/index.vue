@@ -12,14 +12,14 @@
 </template>
 
 <script>
-  import AppHeader from './Header.vue'
-  import AppFooter from './Footer.vue'
+import AppHeader from './Header.vue'
+import AppFooter from './Footer.vue'
 
-  export default {
-    name: 'AppLayout',
-    components: {
-      AppHeader,
-      AppFooter
-    }
+export default {
+  name: 'AppLayout',
+  components: {
+    AppHeader,
+    AppFooter
   }
+}
 </script>s

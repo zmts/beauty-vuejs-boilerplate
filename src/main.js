@@ -18,12 +18,8 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   name: 'Root',
-  template: '<AppLayout/>',
-  components: { AppLayout },
-  el: '#app',
   router,
   store,
-
   mounted () {
     store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth)
     window.addEventListener('resize', () => store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth))
@@ -31,5 +27,6 @@ new Vue({
 
   beforeDestroy () {
     window.removeEventListener('resize', () => store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth))
-  }
-})
+  },
+  render: h => h(AppLayout)
+}).$mount('#app')

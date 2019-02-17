@@ -7,13 +7,11 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      width: { type: String },
-      height: { type: String },
-      color: { type: String }
-    }
+export default {
+  props: {
+    width: { type: String },
+    height: { type: String },
+    color: { type: String }
   }
+}
 </script>
-
-

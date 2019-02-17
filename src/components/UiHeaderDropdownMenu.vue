@@ -12,10 +12,10 @@
 </template>
 
 <script>
-  import UiBaseMenuDropdown from './UiBaseMenuDropdown'
+import UiBaseMenuDropdown from './UiBaseMenuDropdown'
 
-  export default {
-    name: 'UiHeaderDropdownMenu',
-    components: { UiBaseMenuDropdown }
-  }
+export default {
+  name: 'UiHeaderDropdownMenu',
+  components: { UiBaseMenuDropdown }
+}
 </script>

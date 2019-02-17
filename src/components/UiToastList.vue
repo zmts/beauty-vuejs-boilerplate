@@ -10,58 +10,58 @@
 </template>
 
 <script>
-  import UiToast from './UiToast'
-  export default {
-    name: 'UiToastList',
+import UiToast from './UiToast'
+export default {
+  name: 'UiToastList',
 
-    components: {
-      UiToast
+  components: {
+    UiToast
+  },
+
+  watch: {
+    '$route': {
+      handler: 'clearToastList',
+      deep: 'true'
+    }
+  },
+
+  computed: {
+    toastsList () {
+      return this.$store.state.toast.toastsList
+    }
+  },
+
+  methods: {
+    onRemove (id) {
+      this.$store.commit('toast/REMOVE', { id })
     },
-
-    watch: {
-      '$route': {
-        handler: 'clearToastList',
-        deep: 'true'
-      }
-    },
-
-    computed: {
-      toastsList () {
-        return this.$store.state.toast.toastsList
-      }
-    },
-
-    methods: {
-      onRemove (id) {
-        this.$store.commit('toast/REMOVE', { id })
-      },
-      clearToastList () {
-        if (this.toastsList.length) {
-          this.$store.commit('toast/CLEAR_LIST')
-        }
+    clearToastList () {
+      if (this.toastsList.length) {
+        this.$store.commit('toast/CLEAR_LIST')
       }
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
-  .ui-toast-list.component {
-    top: 50px;
-    left: 50px;
-    width: 300px;
-    position: fixed;
-    z-index: 9999;
-  }
+.ui-toast-list.component {
+  top: 50px;
+  left: 50px;
+  width: 300px;
+  position: fixed;
+  z-index: 9999;
+}
 
-  .slide-leave-active,
-  .slide-enter-active {
-    transition: .3s;
-  }
-  .slide-enter {
-    transform: translate(0, 100%);
-  }
-  .slide-leave-to {
-    transform: translate(-200%, 0);
-  }
+.slide-leave-active,
+.slide-enter-active {
+  transition: .3s;
+}
+.slide-enter {
+  transform: translate(0, 100%);
+}
+.slide-leave-to {
+  transform: translate(-200%, 0);
+}
 
 </style>
