@@ -62,7 +62,7 @@ export default {
       this.indexActive++
     },
     goToPrev () {
-      if (this.indexActive <= 1) return
+      if (this.indexActive === 0) return
       this.indexActive--
     },
     checkLoadingStatus () {
