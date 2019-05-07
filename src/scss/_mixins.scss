@@ -1,0 +1,13 @@
+@mixin box-shadow($y: 7px) {
+  box-shadow: 0 $y 5px -2px rgba(204, 204, 204, .25);
+}
+
+@mixin box-shadow-alt() {
+  box-shadow:
+    0 2px 4px 0 rgba($color-gray-500, .2),
+    0 0 1px 1px rgba($color-gray-500, .05);
+}
+
+@mixin text-shadow() {
+  text-shadow: 1px 1px 10px rgba(black, .2);
+}
