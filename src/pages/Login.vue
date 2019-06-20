@@ -3,27 +3,14 @@
     <div class="main">
       <div class="header">Вход</div>
       <div class="content">
-        <md-input-container>
-          <label>E-mail</label>
-          <md-input
-            type="text"
-            v-model="email"
-            required>
-          </md-input>
-        </md-input-container>
+        <label for="email">E-mail</label>
+        <input id="email" type="text" v-model="email">
 
-        <md-input-container md-has-password>
-          <label>Password</label>
-          <md-input
-            type="password"
-            v-model="password"
-            @keyup.enter.native="makeLogin"
-            required>
-          </md-input>
-        </md-input-container>
+        <label for="password">password</label>
+        <input id="password" type="password" v-model="password" @keyup.enter.native="makeLogin">
       </div>
       <div class="buttons">
-        <md-button class="md-raised" @click="makeLogin">login</md-button>
+        <button @click="makeLogin">login</button>
       </div>
 
       <div class="error" v-if="error">
