@@ -15,6 +15,7 @@ module.exports = {
     'generator-star-spacing': 0,
     // allow variables like >> user_id
     'camelcase': 0,
+    'space-before-function-paren': "off",
     'no-trailing-spaces': [
       'error', {'skipBlankLines': true}
     ],
