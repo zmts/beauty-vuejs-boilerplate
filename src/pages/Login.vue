@@ -7,7 +7,7 @@
         <input id="email" type="text" v-model="email">
 
         <label for="password">password</label>
-        <input id="password" type="password" v-model="password" @keyup.enter.native="makeLogin">
+        <input id="password" type="password" v-model="password" @keyup.enter="makeLogin">
       </div>
       <div class="buttons">
         <button @click="makeLogin">login</button>

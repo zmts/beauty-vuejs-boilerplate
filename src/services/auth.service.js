@@ -36,7 +36,7 @@ export function makeLogout () {
     new Http({ auth: true }).post('auth/logout', { refreshToken: getRefreshToken() })
       .then(response => {
         _resetAuthData()
-        $router.push({ name: 'index' })
+        $router.push({ name: 'login' })
         return resolve(new ResponseWrapper(response, response.data))
       }).catch(error => reject(new ErrorWrapper(error)))
   })
