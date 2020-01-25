@@ -1,5 +1,5 @@
 import $store from '../store'
-import * as authService from '../services/auth.service'
+import { AuthService } from '../services/auth.service'
 
 /**
  * Current user state initialization
@@ -8,8 +8,8 @@ import * as authService from '../services/auth.service'
 export function initCurrentUserStateMiddleware (to, from, next) {
   const currentUserId = $store.state.user.currentUser.id
 
-  if (authService.getRefreshToken() && !currentUserId) {
-    return authService.refreshTokens()
+  if (AuthService.getRefreshToken() && !currentUserId) {
+    return AuthService.refreshTokens()
       .then(() => $store.dispatch('user/getCurrent'))
       .then(() => next())
       .catch(error => console.log(error))

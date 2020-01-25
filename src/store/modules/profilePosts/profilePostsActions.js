@@ -1,4 +1,4 @@
-import UsersService from '../../../services/users.service'
+import { UsersService } from '../../../services/users.service'
 
 export default {
   getCurrentUserPosts ({ state, commit, rootState }, payload) {

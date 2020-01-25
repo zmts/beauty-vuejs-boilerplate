@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import * as authService from '../services/auth.service'
+import { AuthService } from '../services/auth.service'
 
 import UiHeaderDropdownMenu from '@/components/UiHeaderDropdownMenu.vue'
 import UiToastList from '@/components/UiToastList'
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     logout () {
-      authService.makeLogout()
+      AuthService.makeLogout()
     }
   }
 }

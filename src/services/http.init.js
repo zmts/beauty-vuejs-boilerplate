@@ -6,10 +6,10 @@
 
 import axios from 'axios'
 
-import * as authService from '../services/auth.service'
+import { AuthService } from '../services/auth.service'
 import { API_URL } from '../.env'
 
-export default class Http {
+export class Http {
   constructor (status) {
     this.isAuth = status && status.auth ? status.auth : false
     this.instance = axios.create({
@@ -22,12 +22,13 @@ export default class Http {
   init () {
     if (this.isAuth) {
       this.instance.interceptors.request.use(request => {
-        request.headers.authorization = authService.getBearer()
+        request.headers.authorization = AuthService.getBearer()
         // if access token expired and refreshToken is exist >> go to API and get new access token
-        if (authService.isAccessTokenExpired() && authService.getRefreshToken()) {
-          return authService.refreshTokens()
+        if (AuthService.isAccessTokenExpired() && AuthService.getRefreshToken()) {
+          return AuthService.refreshTokens()
             .then(response => {
-              authService.setBearer(response.data.accessToken)
+              AuthService.setBearer(response.data.accessToken)
+              request.headers.authorization = AuthService.getBearer()
               return request
             }).catch(error => Promise.reject(error))
         } else {

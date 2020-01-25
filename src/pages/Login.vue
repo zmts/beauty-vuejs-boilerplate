@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import * as authService from '../services/auth.service'
+import { AuthService } from '../services/auth.service'
 
 export default {
   name: 'Login',
@@ -35,7 +35,7 @@ export default {
 
   methods: {
     makeLogin () {
-      authService.makeLogin({
+      AuthService.makeLogin({
         email: this.email,
         password: this.password
       }).then(response => { this.error = '' })
@@ -46,6 +46,7 @@ export default {
         })
         .catch((error) => {
           console.log('error', error)
+          this.$store.commit('toast/NEW', { type: 'error', message: error.message })
           this.error = error.status === 404 ? 'User with same email not found' : error.message
         })
     }

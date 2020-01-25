@@ -1,4 +1,4 @@
-import PostsService from '../../../services/posts.service'
+import { PostsService } from '@/services/posts.service'
 
 export default {
   getListPublic ({ state, commit }, payload) {

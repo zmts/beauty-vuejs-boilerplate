@@ -1,11 +1,11 @@
-import BaseService from './base.service'
+import { BaseService } from './base.service'
 
-class UsersService extends BaseService {
-  get entity () {
+export class UsersService extends BaseService {
+  static get entity () {
     return 'users'
   }
 
-  getCurrent () {
+  static getCurrent () {
     return new Promise((resolve, reject) => {
       return this.request({ auth: true }).get(`${this.entity}/current`)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))
@@ -16,7 +16,7 @@ class UsersService extends BaseService {
     })
   }
 
-  getPostsByUserId (user_id = window.required()) {
+  static getPostsByUserId (user_id = window.required()) {
     return new Promise((resolve, reject) => {
       return this.request({ auth: true }).get(`${this.entity}/${user_id}/posts`)
         .then(response => {
@@ -33,5 +33,3 @@ class UsersService extends BaseService {
     })
   }
 }
-
-export default new UsersService()

@@ -1,28 +1,25 @@
-import Http from './http.init'
+import { Http } from './http.init'
 import { ResponseWrapper, ErrorWrapper } from './util'
 
-export default class BaseService {
-  constructor () {
-    if (!this.entity) {
-      throw new Error('Child service class not provide entity')
-    }
+export class BaseService {
+  static get entity () {
+    throw new Error('"entity" getter not defined')
   }
-
   /**
    * ------------------------------
    * @HELPERS
    * ------------------------------
    */
 
-  request (status = { auth: false }) {
+  static request (status = { auth: false }) {
     return new Http(status)
   }
 
-  responseWrapper (...rest) {
+  static responseWrapper (...rest) {
     return new ResponseWrapper(...rest)
   }
 
-  errorWrapper (...rest) {
+  static errorWrapper (...rest) {
     return new ErrorWrapper(...rest)
   }
 
@@ -32,7 +29,7 @@ export default class BaseService {
    * ------------------------------
    */
 
-  getListPublic (parameters = {}) {
+  static getListPublic (parameters = {}) {
     const params = {
       ...parameters
     }
@@ -51,7 +48,7 @@ export default class BaseService {
     })
   }
 
-  getByIdPublic (id = window.required()) {
+  static getByIdPublic (id = window.required()) {
     return new Promise((resolve, reject) => {
       return this.request().get(`${this.entity}/${id}`)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))
@@ -68,7 +65,7 @@ export default class BaseService {
    * ------------------------------
    */
 
-  getById (id = window.required()) {
+  static getById (id = window.required()) {
     return new Promise((resolve, reject) => {
       return this.request({ auth: true }).get(`${this.entity}/${id}`)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))
@@ -79,7 +76,7 @@ export default class BaseService {
     })
   }
 
-  create (data = window.required()) {
+  static create (data = window.required()) {
     return new Promise((resolve, reject) => {
       return this.request({ auth: true }).post(`${this.entity}`, data)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))
@@ -87,7 +84,7 @@ export default class BaseService {
     })
   }
 
-  update (id = window.required(), data = window.required()) {
+  static update (id = window.required(), data = window.required()) {
     return new Promise((resolve, reject) => {
       return this.request({ auth: true }).patch(`${this.entity}/${id}`, data)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))
@@ -95,7 +92,7 @@ export default class BaseService {
     })
   }
 
-  remove (id = window.required()) {
+  static remove (id = window.required()) {
     return new Promise((resolve, reject) => {
       return this.request({ auth: true }).delete(`${this.entity}/${id}`)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))

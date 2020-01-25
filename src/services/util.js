@@ -25,7 +25,7 @@ function _getStatusMessage (status) {
       message = 'Not found'
       break
     case 503:
-      message = 'Service Unavailable'
+      message = 'Service unavailable. Try again later'
       break
     default:
       message = 'Something wrong. Client default error message'
@@ -35,10 +35,9 @@ function _getStatusMessage (status) {
 }
 
 function _getResponseErrorMessage (error) {
-  if (error.response && error.response.data) return error.response.data.description
+  if (error.response && error.response.data) return error.response.data.message
   if (error.response && error.response.statusText) return error.response.statusText
-  if (error.message) return error.message
-  return '_getResponseErrorMessage can\'t handle error'
+  return error.message === 'Network Error' ? 'Oops! Network Error. Try again later' : error.message
 }
 
 /**
@@ -65,9 +64,9 @@ export class ResponseWrapper {
 export class ErrorWrapper extends Error {
   constructor (error, message) {
     super()
-    this.name = 'ErrorWrapper'
-    this.stack = new Error().stack
     this.success = error.response ? error.response.data.success : false
+    this.meta = error.response ? error.response.data.meta : false
+    this.code = error.response ? error.response.data.code : false
     this.status = error.response ? error.response.status : false
     this.statusMessage = _getStatusMessage(this.status)
     this.message = message || _getResponseErrorMessage(error)
