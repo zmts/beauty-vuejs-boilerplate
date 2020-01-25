@@ -81,7 +81,7 @@ export class ErrorWrapper extends Error {
  * @return {{}}
  */
 export function clearData (data) {
-  let result = {}
+  const result = {}
   forEach(data, (item, propName) => {
     if (isArray(item) && item.length) {
       result[propName] = item

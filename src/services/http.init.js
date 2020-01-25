@@ -22,12 +22,12 @@ export default class Http {
   init () {
     if (this.isAuth) {
       this.instance.interceptors.request.use(request => {
-        request.headers['token'] = authService.getAccessToken()
+        request.headers.authorization = authService.getBearer()
         // if access token expired and refreshToken is exist >> go to API and get new access token
         if (authService.isAccessTokenExpired() && authService.getRefreshToken()) {
           return authService.refreshTokens()
             .then(response => {
-              request.headers['token'] = response.data.accessToken
+              authService.setBearer(response.data.accessToken)
               return request
             }).catch(error => Promise.reject(error))
         } else {
@@ -36,9 +36,8 @@ export default class Http {
       }, error => {
         return Promise.reject(error)
       })
-
-      return this.instance
     }
+
     return this.instance
   }
 }

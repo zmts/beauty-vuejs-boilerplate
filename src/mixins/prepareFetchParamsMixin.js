@@ -6,7 +6,7 @@ import { isValidLimitQuery, isValidPageQuery } from '../router/util'
 export default {
   methods: {
     prepareFetchParamsMixin (data) {
-      let obj = {}
+      const obj = {}
       Object.keys(data).forEach(key => {
         if (Array.isArray((data[key])) && data[key].length) {
           obj[key] = data[key]

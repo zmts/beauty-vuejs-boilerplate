@@ -6,7 +6,7 @@ import { isValidLimitQuery, isValidPageQuery } from '../router/util'
 export default {
   methods: {
     prepareQueryParamsMixin (queryPropList) {
-      let result = {}
+      const result = {}
       Object.keys(queryPropList).forEach(key => {
         if (queryPropList[key]) {
           result[key] = queryPropList[key]

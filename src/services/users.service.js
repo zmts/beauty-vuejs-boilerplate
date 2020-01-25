@@ -10,7 +10,7 @@ class UsersService extends BaseService {
       return this.request({ auth: true }).get(`${this.entity}/current`)
         .then(response => resolve(this.responseWrapper(response, response.data.data)))
         .catch(error => {
-          let message = error.response.data ? error.response.data.error : error.response.statusText
+          const message = error.response.data ? error.response.data.error : error.response.statusText
           reject(this.errorWrapper(error, message))
         })
     })
@@ -20,14 +20,14 @@ class UsersService extends BaseService {
     return new Promise((resolve, reject) => {
       return this.request({ auth: true }).get(`${this.entity}/${user_id}/posts`)
         .then(response => {
-          let data = {
+          const data = {
             content: response.data.data,
             total: response.data.data.total ? response.data.data.total : ''
           }
           resolve(this.responseWrapper(response, data))
         })
         .catch(error => {
-          let message = error.response.data ? error.response.data.error : error.response.statusText
+          const message = error.response.data ? error.response.data.error : error.response.statusText
           reject(this.errorWrapper(error, message))
         })
     })

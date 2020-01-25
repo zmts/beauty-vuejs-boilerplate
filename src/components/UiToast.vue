@@ -36,7 +36,7 @@ export default {
 
   mounted () {
     if (this.item.duration) {
-      let timer = setTimeout(() => {
+      const timer = setTimeout(() => {
         clearTimeout(timer)
         this.remove()
       }, this.item.duration)

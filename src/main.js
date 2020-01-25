@@ -15,7 +15,6 @@ import './assets/fonts/bebasneue.css'
 setGlobalHelpers()
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
 new Vue({
   name: 'Root',
   router,

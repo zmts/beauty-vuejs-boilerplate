@@ -9,7 +9,7 @@ export default {
 
   mutations: {
     NEW (state, payload) {
-      let toast = {
+      const toast = {
         id: new Date().getTime(),
         message: typeof payload === 'string' ? payload : payload.message,
         type: payload.type || 'default',

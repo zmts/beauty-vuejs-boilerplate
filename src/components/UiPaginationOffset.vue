@@ -54,7 +54,7 @@ export default {
 
   computed: {
     isDisabledNextBtn () {
-      let stop = this.total - this.limit
+      const stop = this.total - this.limit
       return this.currentOffset >= stop
     },
     isDisabledPrevBtn () {

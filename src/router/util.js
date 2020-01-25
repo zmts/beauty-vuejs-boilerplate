@@ -3,8 +3,8 @@
  * and pass it to component props
  */
 export function routePropResolver (routeOptions) {
-  let { query } = routeOptions
-  let resultQuery = {}
+  const { query } = routeOptions
+  const resultQuery = {}
 
   Object.keys(query).forEach(key => {
     // parse strings

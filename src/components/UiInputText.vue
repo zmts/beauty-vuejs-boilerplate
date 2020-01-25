@@ -48,8 +48,8 @@ export default {
 
   methods: {
     getRandomInt () {
-      let min = 1
-      let max = 1000000000
+      const min = 1
+      const max = 1000000000
       return Math.floor(Math.random() * (max - min + 1) + min)
     }
   },

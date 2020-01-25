@@ -19,7 +19,7 @@ export default {
   },
 
   watch: {
-    '$route': {
+    $route: {
       handler: 'clearToastList',
       deep: 'true'
     }
