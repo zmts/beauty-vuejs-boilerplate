@@ -8,6 +8,7 @@ This project based on real world practice and ready to use. Have a fun!
 - Base common and layout components
 - Some help mixins
 - Vue CLI v3
+- Developed to work with: https://github.com/zmts/supra-api-nodejs
 
 ## Project structure
 - [`src`](#src)
@@ -152,7 +153,6 @@ npm run build
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 # TODO
-- Integrate strong FLUX architecture
 - Add global loading component
 - Add more examples
 
@@ -160,3 +160,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 - https://github.com/sdras/vue-sample-svg-icons
 - https://github.com/MillerRen/vue-boilerplate
 - https://github.com/vuejs-tips/v-debounce
+
+__!!! Project still in progress !!!__
+
+_2017 - 2018 - 2019 - 2020 ..._
