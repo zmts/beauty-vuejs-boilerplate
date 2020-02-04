@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { Http } from './http.init'
 import { ResponseWrapper, ErrorWrapper } from './util'
 
@@ -21,6 +22,12 @@ export class BaseService {
 
   static errorWrapper (...rest) {
     return new ErrorWrapper(...rest)
+  }
+
+  static querystring (obj) {
+    return qs.stringify(obj, {
+      encode: false
+    })
   }
 
   /**
