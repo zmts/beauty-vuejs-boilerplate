@@ -20,12 +20,16 @@ export default {
     value: { type: String },
     placeholder: { type: String },
     underline: { type: Boolean, default: false },
-    autosize: { type: Boolean, default: true }
+    autosize: { type: Boolean, default: true },
+    refresh: { type: [String, Number, Date] }
   },
 
   watch: {
     value (newVal) {
       this.localValue = newVal
+      this.applyStyles()
+    },
+    refresh () {
       this.applyStyles()
     }
   },
