@@ -7,7 +7,7 @@ This project based on real world practice and ready to use. Have a fun!
 - Response wrapper/Response error wrapper
 - Base common and layout components
 - Some help mixins
-- Vue CLI v3
+- Vue CLI v4
 - Developed to work with: https://github.com/zmts/supra-api-nodejs
 
 ## Project structure
