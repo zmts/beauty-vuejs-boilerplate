@@ -1,5 +1,7 @@
 import * as Fingerprint2 from 'fingerprintjs2'
+import * as UAParser from 'ua-parser-js'
 import axios from 'axios'
+
 import { Http } from './http.init'
 import { ResponseWrapper, ErrorWrapper } from './util'
 import $store from '../store'
@@ -143,7 +145,15 @@ function _getFingerprint () {
           availableScreenResolution: true,
           enumerateDevices: true,
           pixelRatio: true,
-          doNotTrack: true
+          doNotTrack: true,
+          preprocessor: (key, value) => {
+            if (key === 'userAgent') {
+              const parser = new UAParser(value)
+              // return customized user agent (without browser version)
+              return `${parser.getOS().name} :: ${parser.getBrowser().name} :: ${parser.getEngine().name}`
+            }
+            return value
+          }
         }
       }
 
