@@ -1,20 +1,24 @@
 import $store from '../store'
-import { AuthService } from '../services/auth.service'
+import { AuthService } from '@/services/auth.service'
 
 /**
  * Current user state initialization
  * @WARN Must be always first in middleware chain
  */
-export function initCurrentUserStateMiddleware (to, from, next) {
+export async function initCurrentUserStateMiddleware (to, from, next) {
   const currentUserId = $store.state.user.currentUser.id
 
-  if (AuthService.getRefreshToken() && !currentUserId) {
-    return AuthService.refreshTokens()
-      .then(() => $store.dispatch('user/getCurrent'))
-      .then(() => next())
-      .catch(error => console.log(error))
+  if (AuthService.hasRefreshToken() && !currentUserId) {
+    try {
+      await AuthService.debounceRefreshTokens()
+      await $store.dispatch('user/getCurrent')
+      next()
+    } catch (e) {
+      console.log(e)
+    }
+  } else {
+    next()
   }
-  next()
 }
 
 /**

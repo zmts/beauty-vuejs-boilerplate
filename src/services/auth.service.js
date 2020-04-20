@@ -19,54 +19,54 @@ export class AuthService {
    */
 
   static async makeLogin ({ email, password }) {
-    const fingerprint = await _getFingerprint()
-
-    return new Promise((resolve, reject) => {
-      axios.post(`${API_URL}/auth/login`, { email, password, fingerprint })
-        .then(response => {
-          _setAuthData({
-            refreshToken: response.data.data.refreshToken,
-            accessToken: response.data.data.accessToken,
-            exp: _parseTokenData(response.data.data.accessToken).exp
-          })
-          return resolve(new ResponseWrapper(response, response.data.data))
-        }).catch(error => reject(new ErrorWrapper(error)))
-    })
+    try {
+      const fingerprint = await _getFingerprint()
+      const response = await axios.post(`${API_URL}/auth/login`,
+        { email, password, fingerprint },
+        { withCredentials: true })
+      _setAuthData({
+        accessToken: response.data.data.accessToken,
+        exp: _parseTokenData(response.data.data.accessToken).exp
+      })
+      return new ResponseWrapper(response, response.data.data)
+    } catch (error) {
+      throw new ErrorWrapper(error)
+    }
   }
 
-  static makeLogout () {
-    return new Promise((resolve, reject) => {
-      new Http({ auth: true }).post('auth/logout', { refreshToken: this.getRefreshToken() })
-        .then(response => {
-          _resetAuthData()
-          $router.push({ name: 'login' })
-          return resolve(new ResponseWrapper(response, response.data))
-        }).catch(error => reject(new ErrorWrapper(error)))
-    })
+  static async makeLogout () {
+    try {
+      const response = await new Http({ auth: true }).post('auth/logout', {}, { withCredentials: true })
+      _resetAuthData()
+      $router.push({ name: 'login' }).catch(() => {})
+      return new ResponseWrapper(response, response.data.data)
+    } catch (error) {
+      throw new ErrorWrapper(error)
+    }
   }
 
   static async refreshTokens () {
-    const fingerprint = await _getFingerprint()
+    try {
+      const response = await axios.post(`${API_URL}/auth/refresh-tokens`, {
+        fingerprint: await _getFingerprint()
+      }, { withCredentials: true })
 
-    return new Promise((resolve, reject) => {
-      axios.post(`${API_URL}/auth/refresh-tokens`, {
-        refreshToken: this.getRefreshToken(),
-        fingerprint
-      }).then(response => {
-        _setAuthData({
-          refreshToken: response.data.data.refreshToken,
-          accessToken: response.data.data.accessToken,
-          exp: _parseTokenData(response.data.data.accessToken).exp
-        })
-        return resolve(new ResponseWrapper(response, response.data))
-      }).catch(error => {
-        console.log(error.response.data.code)
-        _resetAuthData()
-        $router.push({ name: 'login' })
-        return reject(new ErrorWrapper(error))
+      _setAuthData({
+        accessToken: response.data.data.accessToken,
+        exp: _parseTokenData(response.data.data.accessToken).exp
       })
-    })
+      return new ResponseWrapper(response, response.data.data)
+    } catch (error) {
+      console.log(error.response.data.code)
+      _resetAuthData()
+      $router.push({ name: 'login' }).catch(() => {})
+      throw new ErrorWrapper(error)
+    }
   }
+
+  static debounceRefreshTokens = this._debounce(() => {
+    return this.refreshTokens()
+  }, 100)
 
   /**
    ******************************
@@ -81,12 +81,16 @@ export class AuthService {
     return accessTokenExpDate <= nowTime
   }
 
-  static getRefreshToken () {
-    return localStorage.getItem('refreshToken')
+  static hasRefreshToken () {
+    return Boolean(localStorage.getItem('refreshToken'))
   }
 
-  static setRefreshToken (refreshToken) {
-    localStorage.setItem('refreshToken', refreshToken)
+  static setRefreshToken (status) {
+    if (!['', 'true'].includes(status)) {
+      throw new Error(`setRefreshToken: invalid value ${status}; Expect one of ['', 'true']`)
+    }
+
+    localStorage.setItem('refreshToken', status)
   }
 
   static getBearer () {
@@ -95,6 +99,29 @@ export class AuthService {
 
   static setBearer (accessToken) {
     BEARER = `Bearer ${accessToken}`
+  }
+
+  /**
+   * https://stackoverflow.com/questions/35228052/debounce-function-implemented-with-promises
+   * @param inner
+   * @param ms
+   * @returns {function(...[*]): Promise<unknown>}
+   * @private
+   */
+  static _debounce (inner, ms = 0) {
+    let timer = null
+    let resolves = []
+
+    return function () {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        const result = inner()
+        resolves.forEach(r => r(result))
+        resolves = []
+      }, ms)
+
+      return new Promise(resolve => resolves.push(resolve))
+    }
   }
 }
 
@@ -127,8 +154,8 @@ function _resetAuthData () {
   AuthService.setBearer('')
 }
 
-function _setAuthData ({ refreshToken, accessToken, exp } = {}) {
-  AuthService.setRefreshToken(refreshToken)
+function _setAuthData ({ accessToken, exp } = {}) {
+  AuthService.setRefreshToken('true')
   AuthService.setBearer(accessToken)
   $store.commit('auth/SET_ATOKEN_EXP_DATE', exp)
 }
