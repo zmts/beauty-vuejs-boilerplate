@@ -1,10 +1,12 @@
 import qs from 'qs'
+import { assert } from '@/core'
+
 import { Http } from './http.init'
 import { ResponseWrapper, ErrorWrapper } from './util'
 
 export class BaseService {
   static get entity () {
-    throw new Error('"entity" getter not defined')
+    throw new Error('entity getter not defined')
   }
   /**
    * ------------------------------
@@ -36,34 +38,35 @@ export class BaseService {
    * ------------------------------
    */
 
-  static getListPublic (parameters = {}) {
-    const params = {
-      ...parameters
+  static async getListPublic (parameters = {}) {
+    assert.object(parameters)
+
+    const params = { ...parameters }
+
+    try {
+      const response = await this.request().get(`${this.entity}`, { params })
+      const data = {
+        content: response.data.data,
+        total: Number(response.headers['x-total-count'])
+      }
+
+      return new ResponseWrapper(response, data)
+    } catch (error) {
+      const message = error.response.data ? error.response.data.error : error.response.statusText
+      throw new ErrorWrapper(error, message)
     }
-    return new Promise((resolve, reject) => {
-      return this.request().get(`${this.entity}`, { params })
-        .then(response => {
-          const data = {
-            content: response.data.data.results,
-            total: response.data.data.total
-          }
-          resolve(this.responseWrapper(response, data))
-        }).catch(error => {
-          const message = error.response.data ? error.response.data.error : error.response.statusText
-          reject(this.errorWrapper(error, message))
-        })
-    })
   }
 
-  static getByIdPublic (id = window.required()) {
-    return new Promise((resolve, reject) => {
-      return this.request().get(`${this.entity}/${id}`)
-        .then(response => resolve(this.responseWrapper(response, response.data.data)))
-        .catch(error => {
-          const message = error.response.data ? error.response.data.error : error.response.statusText
-          reject(this.errorWrapper(error, message))
-        })
-    })
+  static async getByIdPublic (id = window.required()) {
+    assert.id(id, { required: true })
+
+    try {
+      const response = await this.request().get(`${this.entity}/${id}`)
+      return new ResponseWrapper(response, response.data.data)
+    } catch (error) {
+      const message = error.response.data ? error.response.data.error : error.response.statusText
+      throw new ErrorWrapper(error, message)
+    }
   }
 
   /**
@@ -72,38 +75,49 @@ export class BaseService {
    * ------------------------------
    */
 
-  static getById (id = window.required()) {
-    return new Promise((resolve, reject) => {
-      return this.request({ auth: true }).get(`${this.entity}/${id}`)
-        .then(response => resolve(this.responseWrapper(response, response.data.data)))
-        .catch(error => {
-          const message = error.response.data ? error.response.data.error : error.response.statusText
-          reject(this.errorWrapper(error, message))
-        })
-    })
+  static async getById (id) {
+    assert.id(id, { required: true })
+
+    try {
+      const response = await this.request({ auth: true }).get(`${this.entity}/${id}`)
+      return new ResponseWrapper(response, response.data.data)
+    } catch (error) {
+      const message = error.response.data ? error.response.data.error : error.response.statusText
+      throw new ErrorWrapper(error, message)
+    }
   }
 
-  static create (data = window.required()) {
-    return new Promise((resolve, reject) => {
-      return this.request({ auth: true }).post(`${this.entity}`, data)
-        .then(response => resolve(this.responseWrapper(response, response.data.data)))
-        .catch(error => reject(this.errorWrapper(error)))
-    })
+  static async create (data = {}) {
+    assert.object(data, { required: true })
+
+    try {
+      const response = await this.request({ auth: true }).post(`${this.entity}`, data)
+      return new ResponseWrapper(response, response.data.data)
+    } catch (error) {
+      throw new ErrorWrapper(error)
+    }
   }
 
-  static update (id = window.required(), data = window.required()) {
-    return new Promise((resolve, reject) => {
-      return this.request({ auth: true }).patch(`${this.entity}/${id}`, data)
-        .then(response => resolve(this.responseWrapper(response, response.data.data)))
-        .catch(error => reject(this.errorWrapper(error)))
-    })
+  static async update (id, data = {}) {
+    assert.id(id, { required: true })
+    assert.object(data, { required: true })
+
+    try {
+      const response = await this.request({ auth: true }).patch(`${this.entity}/${id}`, data)
+      return new ResponseWrapper(response, response.data.data)
+    } catch (error) {
+      throw new ErrorWrapper(error)
+    }
   }
 
-  static remove (id = window.required()) {
-    return new Promise((resolve, reject) => {
-      return this.request({ auth: true }).delete(`${this.entity}/${id}`)
-        .then(response => resolve(this.responseWrapper(response, response.data.data)))
-        .catch(error => reject(this.errorWrapper(error)))
-    })
+  static async remove (id) {
+    assert.id(id, { required: true })
+
+    try {
+      const response = await this.request({ auth: true }).delete(`${this.entity}/${id}`)
+      return new ResponseWrapper(response, response.data.data)
+    } catch (error) {
+      throw new ErrorWrapper(error)
+    }
   }
 }

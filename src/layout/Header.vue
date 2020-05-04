@@ -42,8 +42,8 @@ export default {
     UiHeaderDropdownMenu
   },
   methods: {
-    logout () {
-      AuthService.makeLogout()
+    async logout () {
+      await AuthService.makeLogout()
     }
   }
 }

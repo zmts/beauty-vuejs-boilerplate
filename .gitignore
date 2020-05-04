@@ -19,3 +19,9 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+# tmp
+_tmp/
+tmp/
+.tmp/
+tmp_files/

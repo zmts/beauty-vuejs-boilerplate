@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { PostsService } from '@/services/posts.service'
 
 import prepareQueryParamsMixin from '../../mixins/prepareQueryParamsMixin'
 import prepareFetchParamsMixin from '../../mixins/prepareFetchParamsMixin'
@@ -32,8 +32,8 @@ export default {
   },
 
   props: {
-    limit: { type: Number },
-    page: { type: Number }
+    limit: { type: Number, default: 10 },
+    offset: { type: Number, default: 0 }
   },
 
   watch: {
@@ -43,58 +43,61 @@ export default {
       })
       this.fetchData()
     },
-    'pagination.page': function () {
+    'pagination.offset': function () {
       this.$router.replace({
         query: this.useInUrlQueryPropList
       })
       this.fetchData()
-    },
-    limit: {
-      handler: function (newVal) {
-        this.$store.commit('news/SET_PAGINATION', { limit: newVal })
-      },
-      immediate: true
-    },
-    page: {
-      handler: function (newVal) {
-        this.$store.commit('news/SET_PAGINATION', { page: newVal })
-      },
-      immediate: true
     }
   },
 
   data () {
     return {
-      newsText: 'NewsPage Component'
+      newsText: 'NewsPage Component',
+      news: [],
+      error: false,
+      loading: false,
+      pagination: {
+        limit: this.limit,
+        offset: this.offset,
+        total: 0
+      }
     }
   },
 
   methods: {
-    fetchData () {
-      this.$store.dispatch('news/getListPublic', { params: this.fetchParams })
+    async fetchData () {
+      this.loading = true
+
+      try {
+        const { data } = await PostsService.getListPublic(this.fetchParams)
+        this.news = data.content
+        this.pagination.total = data.total
+      } catch (e) {
+        this.$store.commit('toast/NEW', { type: 'error', message: e.message, e })
+        this.error = e.message
+        console.log(e)
+      } finally {
+        this.loading = false
+      }
     }
   },
 
   computed: {
-    ...mapState('news', {
-      news: 'items',
-      pagination: 'pagination',
-      error: 'error',
-      loading: 'loading'
-    }),
-    ...mapGetters('news', [
-      'isEmpty'
-    ]),
+    isEmpty () {
+      return this.news && !this.news.length
+    },
+
     useInUrlQueryPropList () {
       return this.prepareQueryParamsMixin({
         limit: this.pagination.limit,
-        page: this.pagination.page
+        offset: this.pagination.offset
       })
     },
     fetchParams () {
       const pagination = this.prepareFetchParamsMixin({
         limit: this.pagination.limit,
-        page: this.pagination.page
+        offset: this.pagination.offset
       })
 
       return { ...pagination }

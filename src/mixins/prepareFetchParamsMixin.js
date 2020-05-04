@@ -1,4 +1,4 @@
-import { isValidLimitQuery, isValidPageQuery } from '../router/util'
+import { isValidLimitQuery, isValidPageQuery } from '@/router/util'
 
 /**
  * main fetch params validation

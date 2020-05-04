@@ -1,4 +1,4 @@
-import { isValidLimitQuery, isValidPageQuery } from '../router/util'
+import { isValidLimitQuery, isValidPageQuery } from '@/router/util'
 /**
  * loop over all component props that uses in url
  * return only valid props, then you get only valid params in fetchParams(component computed prop)

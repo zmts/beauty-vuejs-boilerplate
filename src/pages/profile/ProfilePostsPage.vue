@@ -10,32 +10,91 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { PostsService } from '@/services/posts.service'
+import prepareQueryParamsMixin from '../../mixins/prepareQueryParamsMixin'
+import prepareFetchParamsMixin from '../../mixins/prepareFetchParamsMixin'
 
 export default {
   name: 'ProfilePostsPage',
+
+  props: {
+    limit: { type: Number, default: 10 },
+    offset: { type: Number, default: 0 }
+  },
+
+  mixins: [prepareQueryParamsMixin, prepareFetchParamsMixin],
+
+  watch: {
+    'pagination.limit': function () {
+      this.$router.replace({
+        query: this.useInUrlQueryPropList
+      })
+      this.fetchData()
+    },
+    'pagination.offset': function () {
+      this.$router.replace({
+        query: this.useInUrlQueryPropList
+      })
+      this.fetchData()
+    }
+  },
+
   data () {
     return {
-      //
+      posts: [],
+      error: false,
+      loading: false,
+      pagination: {
+        limit: this.limit,
+        offset: this.offset,
+        total: 0
+      }
     }
   },
 
   methods: {
-    fetchData () {
-      this.$store.dispatch('profilePosts/getCurrentUserPosts')
+    async fetchData () {
+      this.loading = true
+
+      try {
+        const { data } = await PostsService.getPostsByUserId(this.fetchParams)
+        this.posts = data.content
+        this.pagination.total = data.total
+      } catch (e) {
+        this.$store.commit('toast/NEW', { type: 'error', message: e.message, e })
+        this.error = e.message
+        console.log(e)
+      } finally {
+        this.loading = false
+      }
     }
   },
 
   computed: {
-    ...mapState('profilePosts', {
-      posts: 'items',
-      pagination: 'pagination',
-      error: 'error',
-      loading: 'loading'
-    }),
-    ...mapGetters('news', [
-      'isEmpty'
-    ])
+    filter () {
+      return {
+        userId: this.$currentUser.id
+      }
+    },
+    useInUrlQueryPropList () {
+      return this.prepareQueryParamsMixin({
+        limit: this.pagination.limit,
+        offset: this.pagination.offset
+      })
+    },
+    fetchParams () {
+      const filter = this.prepareFetchParamsMixin(this.filter)
+
+      const pagination = this.prepareFetchParamsMixin({
+        limit: this.pagination.limit,
+        offset: this.pagination.offset
+      })
+
+      return { filter, ...pagination }
+    },
+    isEmpty () {
+      return this.posts && !this.posts.length
+    }
   },
 
   mounted () {

@@ -3,7 +3,6 @@ import Vue from 'vue'
 import AppLayout from './layout/index.vue'
 import router from './router'
 import store from './store'
-import setGlobalHelpers from './global.helpers'
 
 import './mixins'
 import './plugins'
@@ -12,7 +11,6 @@ import './thirdParty'
 import './scss/style.scss'
 import './assets/fonts/bebasneue.css'
 
-setGlobalHelpers()
 Vue.config.productionTip = false
 
 new Vue({

@@ -23,9 +23,5 @@ module.exports = {
   },
   parserOptions: {
     parser: 'babel-eslint'
-  },
-  globals: {
-    __typecheck: true,
-    __type: true
   }
 }

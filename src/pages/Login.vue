@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { AuthService } from '../services/auth.service'
+import { AuthService } from '@/services/auth.service'
 
 export default {
   name: 'Login',
@@ -34,21 +34,16 @@ export default {
   },
 
   methods: {
-    makeLogin () {
-      AuthService.makeLogin({
-        email: this.email,
-        password: this.password
-      }).then(response => { this.error = '' })
-        .then(() => {
-          this.$store.dispatch('user/getCurrent')
-            .then(() => this.$router.push('profile'))
-            .catch(error => console.log(error))
-        })
-        .catch((error) => {
-          console.log('error', error)
-          this.$store.commit('toast/NEW', { type: 'error', message: error.message })
-          this.error = error.status === 404 ? 'User with same email not found' : error.message
-        })
+    async makeLogin () {
+      try {
+        await AuthService.makeLogin({ email: this.email, password: this.password })
+        this.error = ''
+        await this.$store.dispatch('user/getCurrent')
+        await this.$router.push('profile')
+      } catch (error) {
+        this.$store.commit('toast/NEW', { type: 'error', message: error.message })
+        this.error = error.status === 404 ? 'User with same email not found' : error.message
+      }
     }
   }
 }

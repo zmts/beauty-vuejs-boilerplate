@@ -26,7 +26,6 @@ This project based on real world practice and ready to use. Have a fun!
   - [`store`](#store)
   - [`.env.js`](#envjs)
   - [`main.js`](#mainjs)
-  - [`global.helpers.js`](#globalhelpersjs)
 
 ### `src`
 Source =)
@@ -118,7 +117,7 @@ directives: {
   debounce
 }
 ```
-And use it in template.
+And use it in a template.
 ```
 <input type="text" v-model="name" v-debounce="500" @debounce-change="runSomeMethod">
 ```
@@ -151,10 +150,6 @@ npm run build
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-# TODO
-- Add global loading component
-- Add more examples
 
 # Amazing repos where I found some great approaches:
 - https://github.com/sdras/vue-sample-svg-icons
