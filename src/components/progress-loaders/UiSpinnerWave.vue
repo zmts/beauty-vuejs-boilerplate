@@ -1,5 +1,5 @@
 <template>
-  <div class="spinner-wave component">
+  <div class="ui-spinner-wave component">
     <div class="sk-wave">
       <div class="sk-rect sk-rect1" :style="loadingColor"></div>
       <div class="sk-rect sk-rect2" :style="loadingColor"></div>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'SpinnerWave',
+  name: 'UiSpinnerWave',
   props: {
     color: {
       type: String,
@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.spinner-wave {
+.ui-spinner-wave {
   height: 100%;
   width: 100%;
   z-index: 10;

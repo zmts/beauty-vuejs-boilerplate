@@ -1,12 +1,12 @@
 <template>
-  <div class="pulse-loading component">
+  <div class="ui-pulse-loading component">
     <div class="sk-spinner sk-spinner-pulse"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PulseLoading'
+  name: 'UiPulseLoading'
 }
 </script>
 
