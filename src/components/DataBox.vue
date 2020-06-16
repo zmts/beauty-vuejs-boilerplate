@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import SpinnerWave from './SpinnerWave.vue'
+import SpinnerWave from './progress-loaders/UiSpinnerWave.vue'
 
 export default {
   name: 'DataBox',
