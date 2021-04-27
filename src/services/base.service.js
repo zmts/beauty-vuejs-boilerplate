@@ -57,7 +57,7 @@ export class BaseService {
     }
   }
 
-  static async getByIdPublic (id = window.required()) {
+  static async getByIdPublic (id) {
     assert.id(id, { required: true })
 
     try {

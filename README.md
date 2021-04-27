@@ -102,9 +102,6 @@ Environment variables (add this to git ignore).
 ### `main.js`
 Root app initialization file.
 
-### `global.helpers.js`
-Add global helpers to window object. Yepp globals ... =)
-
 ### How to declare global SCSS variables/mixins etc... ?
 In `/build/utils.js` >> `generateLoaders('sass')`
 

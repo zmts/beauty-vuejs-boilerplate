@@ -41,7 +41,7 @@ function _getResponseErrorMessage (error) {
 }
 
 /**
- * Create instant, which represent response object
+ * Create instance, which represent response object
  * @param {Object} [data] - custom data
  * @param {Object} [response] - axios response object
  * @param {String} [message] - custom message to display
@@ -57,7 +57,7 @@ export class ResponseWrapper {
 }
 
 /**
- * Create instant, which represent error object
+ * Create instance, which represent error object
  * @param {Object} [error] - axios error object
  * @param {String} [message] - custom message to display
  */
