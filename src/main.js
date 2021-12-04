@@ -13,17 +13,19 @@ import './assets/fonts/bebasneue.css'
 
 Vue.config.productionTip = false
 
+const commitWindowWidth = () => store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth)
+
 new Vue({
   name: 'Root',
   router,
   store,
   mounted () {
-    store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth)
-    window.addEventListener('resize', () => store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth))
+    commitWindowWidth()
+    window.addEventListener('resize', commitWindowWidth)
   },
 
   beforeDestroy () {
-    window.removeEventListener('resize', () => store.commit('dom/SET_WINDOW_WIDTH', window.innerWidth))
+    window.removeEventListener('resize', commitWindowWidth)
   },
   render: h => h(AppLayout)
 }).$mount('#app')
